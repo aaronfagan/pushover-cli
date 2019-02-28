@@ -97,7 +97,7 @@ then
 	usage
 else
 	printf '\033[0;37m'
-	printf "> Sending notification..."
+	printf "> Sending notification... "
 	/usr/bin/curl -s \
 		-F "token=${TOKEN}" \
 		-F "user=${USER}" \
@@ -108,6 +108,6 @@ else
 		-F "message=${MESSAGE}" \
 		https://api.pushover.net/1/messages.json \
 	| grep 'errors' > /dev/null 2>&1
-	if [ $? != 0 ]; then printf "done!\n"; else printf "failed!\n"; fi
+	if [ $? != 0 ]; then printf "success!\n"; else printf "failed!\n"; fi
 	printf '\033[0m'
 fi

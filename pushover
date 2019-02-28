@@ -97,7 +97,7 @@ then
 	usage
 else
 	printf '\033[0;37m'
-	printf "> Sending notification... "
+	printf "> Sending notification..."
 	/usr/bin/curl -s \
 		-F "token=${TOKEN}" \
 		-F "user=${USER}" \

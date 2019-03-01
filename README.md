@@ -10,6 +10,11 @@ bash install.sh && \
 cd ../
 ```
 
+## Upgrade
+```
+pushover --upgrade
+```
+
 ## Usage
 - Run `pushover --help` for examples and options.
 

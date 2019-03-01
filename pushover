@@ -102,7 +102,7 @@ then
 	git clone git@github.com:aaronfagan/pushover-cli.git /opt/pushover-cli > /dev/null 2>&1
 	cd /opt/pushover-cli
 	chmod +x upgrade.sh
-	bash upgrade.sh
+	bash upgrade.sh $VERSION
 	cd - > /dev/null 2>&1
 	rm -rf /opt/pushover-cli
 	exit 1

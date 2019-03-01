@@ -89,7 +89,7 @@ do
 			usage
 		;;
 		--version)
-			echo -e "\033[0;37m Pushover CLI version $VERSION.\033[0m"
+			echo -e "\033[0;37m\nPushover CLI version $VERSION.\n\033[0m"
 			exit 1
 		;;
 		*) 

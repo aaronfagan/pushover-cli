@@ -80,12 +80,13 @@ do
 			shift
 		;;
 		--upgrade)
-			git clone git@github.com:aaronfagan/pushover-cli.git /opt/pushover-cli > /dev/null 2>&1
-			cd /opt/pushover-cli
+			DIR_TEMP=/opt/pushover-cli
+			git clone git@github.com:aaronfagan/pushover-cli.git $DIR_TEMP > /dev/null 2>&1
+			cd $DIR_TEMP
 			chmod +x upgrade.sh
 			bash upgrade.sh $VERSION
 			cd - > /dev/null 2>&1
-			rm -rf /opt/pushover-cli
+			rm -rf $DIR_TEMP
 			exit 1
 		;;
 		--help)

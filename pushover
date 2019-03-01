@@ -25,7 +25,7 @@ Options:
 	--priority 	Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
 	--retry 	How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
 	--expire 	How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
-	--upgrade 	Upgrade to the latest version.
+	--upgrade 	Upgrade to the latest version. Current version is $VERSION.
 Example:
 	pushover \\
 	--user YOUR_USER_KEY \\
@@ -99,10 +99,12 @@ done
 
 if [ "$UPGRADE" = true ]
 then
+	export VERSION_CURRENT=VERSION
 	git clone git@github.com:aaronfagan/pushover-cli.git /opt/pushover-cli > /dev/null 2>&1
 	cd /opt/pushover-cli
 	chmod +x upgrade.sh
 	bash upgrade.sh $VERSION
+	echo $VERSION
 	cd - > /dev/null 2>&1
 	rm -rf /opt/pushover-cli
 	exit 1

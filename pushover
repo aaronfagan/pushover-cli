@@ -9,7 +9,6 @@ PRIORITY="0"
 RETRY="60"
 EXPIRE="86400"
 ERROR=false
-UPGRADE=true
 VERSION="1.0.1"
 
 usage() {
@@ -82,9 +81,13 @@ do
 			shift
 		;;
 		--upgrade)
-			UPGRADE="${2:-$UPGRADE}"
-			shift
-			shift
+			git clone git@github.com:aaronfagan/pushover-cli.git /opt/pushover-cli > /dev/null 2>&1
+			cd /opt/pushover-cli
+			chmod +x upgrade.sh
+			bash upgrade.sh $VERSION
+			cd - > /dev/null 2>&1
+			rm -rf /opt/pushover-cli
+			exit 1
 		;;
 		--help)
 			usage
@@ -101,17 +104,6 @@ do
 		;;
 	esac
 done
-
-if [ "$UPGRADE" = true ]
-then
-	git clone git@github.com:aaronfagan/pushover-cli.git /opt/pushover-cli > /dev/null 2>&1
-	cd /opt/pushover-cli
-	chmod +x upgrade.sh
-	bash upgrade.sh $VERSION
-	cd - > /dev/null 2>&1
-	rm -rf /opt/pushover-cli
-	exit 1
-fi
 
 if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]
 then

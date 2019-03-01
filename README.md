@@ -1,5 +1,5 @@
 # Pushover CLI
-A binary installation for [Pushover](https://pushover.net/) notifications.
+A command line tool for [Pushover](https://pushover.net/) notifications.
 
 ## Installation
 ```

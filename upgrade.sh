@@ -10,6 +10,6 @@ else
 	VERSION=$(awk -F'"' '/^VERSION=/ {print $2}' /usr/local/bin/pushover)
 	chmod +x -R /usr/local/bin/pushover
 	printf '\033[0;37m'
-	printf "\nPushover CLI upgraded from version $1 to $VERSION! Run \"pushover --help\" for usage instructions.\n"
+	printf "\nPushover CLI upgraded from version $1 to $VERSION.\n"
 	printf '\033[0m\n'
 fi

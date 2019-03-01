@@ -91,13 +91,15 @@ done
 
 if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]
 then
+	printf '\n'
 	if [ -z "$USER" ]; then echo -e "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m"; fi
 	if [ -z "$TOKEN" ]; then echo -e "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m"; fi
 	if [ -z "$MESSAGE" ]; then echo -e "\033[0;31mERROR:\033[0;37m --message arguement is required.\033[0m"; fi
+	printf '\n'
 	usage
 else
 	printf '\033[0;37m'
-	printf "> Sending notification..."
+	printf "\n> Sending notification..."
 	/usr/bin/curl -s \
 		-F "token=${TOKEN}" \
 		-F "user=${USER}" \
@@ -108,6 +110,6 @@ else
 		-F "message=${MESSAGE}" \
 		https://api.pushover.net/1/messages.json \
 	| grep 'errors' > /dev/null 2>&1
-	if [ $? != 0 ]; then printf "success!\n"; else printf "failed!\n"; fi
+	if [ $? != 0 ]; then printf "success!\n\n"; else printf "failed!\n\n"; fi
 	printf '\033[0m'
 fi

@@ -83,7 +83,7 @@ do
 		*) 
 			INVALID+=("$1")
 			shift
-			echo -e "\033[0;31mERROR:\033[0;37m Invalid arguement: $INVALID\033[0m"
+			echo -e "\033[0;31m\nERROR:\033[0;37m Invalid arguement: $INVALID\033[0m"
 			usage
 		;;
 	esac

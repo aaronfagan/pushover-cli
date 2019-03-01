@@ -88,6 +88,9 @@ do
 		--help)
 			usage
 		;;
+		--version)
+			echo -e "\033[0;37m Pushover CLI version $VERSION.\033[0m"
+		;;
 		*) 
 			INVALID+=("$1")
 			shift

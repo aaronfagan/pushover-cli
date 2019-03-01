@@ -1,5 +1,5 @@
 #!/bin/bash
-$VERSION_CURRENT="1.0.1"
+VERSION_CURRENT="1.0.1"
 cp pushover /usr/local/bin/pushover
 chmod +x -R /usr/local/bin/pushover
 printf '\033[0;37m'

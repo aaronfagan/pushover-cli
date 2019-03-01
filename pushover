@@ -15,8 +15,8 @@ usage() {
 Usage:
 	pushover [options]
 Options:
-	--user 		PushOver user token. REQUIRED.
-	--token 	PushOver application token. REQUIRED.
+	--user 		Pushover user key. REQUIRED.
+	--token 	Pushover application API token. REQUIRED.
 	--title 	Notification title.
 	--message 	Notification message. REQUIRED.
 	--html 		Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
@@ -25,7 +25,7 @@ Options:
 	--expire 	How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
 Example:
 	pushover \\
-	--user YOUR_USER_TOKEN \\
+	--user YOUR_USER_KEY \\
 	--token YOUR_APP_TOKEN \\
 	--title \"Test Notification\" \\
 	--message \"Here is the notification!\"

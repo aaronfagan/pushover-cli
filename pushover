@@ -95,7 +95,6 @@ then
 	if [ -z "$USER" ]; then echo -e "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m"; fi
 	if [ -z "$TOKEN" ]; then echo -e "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m"; fi
 	if [ -z "$MESSAGE" ]; then echo -e "\033[0;31mERROR:\033[0;37m --message arguement is required.\033[0m"; fi
-	printf '\n'
 	usage
 else
 	printf '\033[0;37m'

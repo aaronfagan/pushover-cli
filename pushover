@@ -10,8 +10,7 @@ RETRY="60"
 EXPIRE="86400"
 ERROR=false
 UPGRADE=true
-VERSION_LAST="1.0.0"
-VERSION_NEW="1.0.1"
+VERSION="1.0.1"
 
 usage() {
 	echo "
@@ -103,7 +102,7 @@ then
 	git clone git@github.com:aaronfagan/pushover-cli.git /opt/pushover-cli > /dev/null 2>&1
 	cd /opt/pushover-cli
 	chmod +x upgrade.sh
-	bash upgrade.sh $VERSION_LAST $VERSION_NEW
+	bash upgrade.sh $VERSION
 	cd - > /dev/null 2>&1
 	rm -rf /opt/pushover-cli
 	exit 1

@@ -98,8 +98,7 @@ done
 
 if [ "$UPGRADE" = true ]
 then
-	cd /opt
-	git clone git@github.com:aaronfagan/pushover-cli.git /opt
+	git clone git@github.com:aaronfagan/pushover-cli.git /opt/pushover-cli
 	cd /opt/pushover-cli
 	chmod +x upgrade.sh
 	bash upgrade.sh

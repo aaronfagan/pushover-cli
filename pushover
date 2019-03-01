@@ -24,8 +24,7 @@ Options:
 	--priority 	Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
 	--retry 	How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
 	--expire 	How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
-	--version 	Display the current version.
-	--upgrade 	Upgrade to the latest version.
+	--upgrade 	Upgrade to the latest version oh Pushover CLI.
 Example:
 	pushover \\
 	--user YOUR_USER_KEY \\

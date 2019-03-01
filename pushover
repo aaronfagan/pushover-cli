@@ -11,7 +11,6 @@ EXPIRE="86400"
 ERROR=false
 
 usage() {
-	printf '\033[0;37m'
 	echo "
 Usage:
 	pushover [options]
@@ -31,7 +30,6 @@ Example:
 	--title \"Test Notification\" \\
 	--message \"Here is the notification!\"
 	"
-	printf '\033[0m'
 	exit 1
 }
 

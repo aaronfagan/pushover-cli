@@ -84,8 +84,8 @@ do
 			DIR_TEMP=/opt/pushover-cli
 			git clone git@github.com:aaronfagan/pushover-cli.git $DIR_TEMP > /dev/null 2>&1
 			cd $DIR_TEMP
-			chmod +x upgrade.sh
-			bash upgrade.sh $VERSION
+			chmod +x ./scripts/upgrade.sh
+			bash ./scripts/upgrade.sh $VERSION
 			cd - > /dev/null 2>&1
 			rm -rf $DIR_TEMP
 			exit 0

@@ -5,8 +5,8 @@ A command line tool for [Pushover](https://pushover.net/) notifications.
 ```
 git clone git@github.com:aaronfagan/pushover-cli.git && \
 cd pushover-cli && \
-chmod +x install.sh && \
-bash install.sh && \
+chmod +x ./scripts/install.sh && \
+bash ./scripts/install.sh && \
 cd ../
 ```
 

@@ -93,13 +93,13 @@ do
 			exit 0
 		;;
 		-v | --version)
-			echo -e "\033[0;37m\nPushover CLI v$VERSION.\n\033[0m"
+			echo -ne "\033[0;37m\nPushover CLI v$VERSION.\n\033[0m\n"
 			exit 0
 		;;
 		*) 
 			INVALID+=("$1")
 			shift
-			echo -e "\033[0;31m\nERROR:\033[0;37m Invalid arguement: $INVALID\033[0m"
+			echo -ne "\033[0;31m\nERROR:\033[0;37m Invalid arguement: $INVALID\033[0m\n"
 			usage
 			exit 1
 		;;
@@ -108,15 +108,15 @@ done
 
 if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]
 then
-	printf '\n'
-	if [ -z "$USER" ]; then echo -e "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m"; fi
-	if [ -z "$TOKEN" ]; then echo -e "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m"; fi
-	if [ -z "$MESSAGE" ]; then echo -e "\033[0;31mERROR:\033[0;37m --message arguement is required.\033[0m"; fi
+	echo -ne '\n'
+	if [ -z "$USER" ]; then echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"; fi
+	if [ -z "$TOKEN" ]; then echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n"; fi
+	if [ -z "$MESSAGE" ]; then echo -ne "\033[0;31mERROR:\033[0;37m --message arguement is required.\033[0m\n"; fi
 	usage
 	exit 1
 else
-	printf '\033[0;37m'
-	printf "\n> Sending notification..."
+	echo -ne '\033[0;37m'
+	echo -ne "\n> Sending notification..."
 	/usr/bin/curl -s \
 		-F "token=${TOKEN}" \
 		-F "user=${USER}" \
@@ -127,6 +127,14 @@ else
 		-F "message=${MESSAGE}" \
 		https://api.pushover.net/1/messages.json \
 	| grep 'errors' > /dev/null 2>&1
-	if [ $? != 0 ]; then printf "success!\n\n"; else printf "failed!\n\n"; exit 1; fi
-	printf '\033[0m'
+	if [ $? != 0 ];
+	then 
+		echo -ne "success!\n\n";
+		echo -ne '\033[0m'
+		exit 0
+	else
+		echo -ne "failed!\n\n";
+		echo -ne '\033[0m'
+		exit 1;
+	fi
 fi

@@ -13,4 +13,3 @@ else
 	printf "\nPushover CLI upgraded successfully (v$1 => v$VERSION).\n"
 	printf '\033[0m\n'
 fi
-

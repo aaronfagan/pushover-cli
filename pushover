@@ -32,7 +32,6 @@ Example:
 	--title \"Test Notification\" \\
 	--message \"Here is the notification!\"
 	"
-	exit $1
 }
 
 while [[ $# -gt 0 ]]
@@ -87,7 +86,6 @@ do
 			bash upgrade.sh $VERSION
 			cd - > /dev/null 2>&1
 			rm -rf $DIR_TEMP
-			exit
 		;;
 		--help)
 			usage
@@ -100,7 +98,8 @@ do
 			INVALID+=("$1")
 			shift
 			echo -e "\033[0;31m\nERROR:\033[0;37m Invalid arguement: $INVALID\033[0m"
-			usage('1')
+			usage
+			exit 1
 		;;
 	esac
 done
@@ -111,7 +110,8 @@ then
 	if [ -z "$USER" ]; then echo -e "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m"; fi
 	if [ -z "$TOKEN" ]; then echo -e "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m"; fi
 	if [ -z "$MESSAGE" ]; then echo -e "\033[0;31mERROR:\033[0;37m --message arguement is required.\033[0m"; fi
-	usage('1')
+	usage
+	exit 1
 else
 	printf '\033[0;37m'
 	printf "\n> Sending notification..."

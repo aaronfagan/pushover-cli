@@ -1,5 +1,5 @@
 #!/bin/bash
-cp ../bin/pushover /usr/local/bin/pushover
+cp ./bin/pushover /usr/local/bin/pushover
 chmod +x -R /usr/local/bin/pushover
 VERSION=$(awk -F'"' '/^VERSION=/ {print $2}' /usr/local/bin/pushover)
 echo -ne '\033[0;37m'

@@ -86,6 +86,7 @@ do
 			bash upgrade.sh $VERSION
 			cd - > /dev/null 2>&1
 			rm -rf $DIR_TEMP
+			exit
 		;;
 		--help)
 			usage

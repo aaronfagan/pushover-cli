@@ -25,6 +25,8 @@ Options:
 	--retry 	How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
 	--expire 	How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
 	--upgrade 	Upgrade to the latest version of Pushover CLI.
+	--version	Currently installed version of Pushover CLI.
+	--help 		Usage, options, and exmples.
 Example:
 	pushover \\
 	--user YOUR_USER_KEY \\
@@ -88,12 +90,12 @@ do
 			rm -rf $DIR_TEMP
 			exit 0
 		;;
-		--help)
-			usage
-			exit 0
-		;;
 		-v | --version)
 			echo -ne "\033[0;37m\nPushover CLI v$VERSION.\n\033[0m\n"
+			exit 0
+		;;
+		--help)
+			usage
 			exit 0
 		;;
 		*) 

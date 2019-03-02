@@ -90,6 +90,7 @@ do
 		;;
 		--help)
 			usage
+			exit
 		;;
 		-v | --version)
 			echo -e "\033[0;37m\nPushover CLI v$VERSION.\n\033[0m"

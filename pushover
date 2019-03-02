@@ -91,7 +91,7 @@ do
 			exit 0
 		;;
 		-v | --version)
-			echo -ne "\033[0;37m\nPushover CLI v$VERSION.\n\033[0m\n"
+			echo -ne "\033[0;37m\nPushover CLI - v$VERSION\n\033[0m\n"
 			exit 0
 		;;
 		--help)

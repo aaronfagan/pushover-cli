@@ -11,31 +11,6 @@ EXPIRE="86400"
 ERROR=false
 VERSION="1.0.2"
 
-usage() {
-	echo "
-Usage:
-	pushover [options]
-Options:
-	--user 		Pushover user key. REQUIRED.
-	--token 	Pushover application API token. REQUIRED.
-	--title 	Notification title.
-	--message 	Notification message. REQUIRED.
-	--html 		Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
-	--priority 	Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
-	--retry 	How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
-	--expire 	How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
-	--upgrade 	Upgrade to the latest version of Pushover CLI.
-	--version	Currently installed version of Pushover CLI.
-	--help 		Usage instructions.
-Example:
-	pushover \\
-	--user YOUR_USER_KEY \\
-	--token YOUR_APP_TOKEN \\
-	--title \"Test Notification\" \\
-	--message \"Here is the notification!\"
-	"
-}
-
 while [[ $# -gt 0 ]]
 do
 	key="$1"
@@ -141,3 +116,32 @@ else
 		exit 1;
 	fi
 fi
+
+usage() {
+	echo "
+Usage:
+	pushover [options]
+Options:
+	--user 		Pushover user key. REQUIRED.
+	--token 	Pushover application API token. REQUIRED.
+	--title 	Notification title.
+	--message 	Notification message. REQUIRED.
+	--html 		Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
+	--priority 	Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
+	--retry 	How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
+	--expire 	How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
+	--upgrade 	Upgrade to the latest version of Pushover CLI.
+	--version	Currently installed version of Pushover CLI.
+	--help 		Usage instructions.
+Example:
+	pushover \\
+	--user YOUR_USER_KEY \\
+	--token YOUR_APP_TOKEN \\
+	--title \"Test Notification\" \\
+	--message \"Here is the notification!\"
+	"
+}
+
+upgrade() {  }
+
+configure() {  }

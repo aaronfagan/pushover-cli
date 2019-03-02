@@ -16,7 +16,7 @@ pushover --upgrade
 ```
 
 ## Usage
-- Run `pushover --help` for examples and options.
+- Run `pushover --help` for usage and example.
 
 # Contributors
 * Aaron Fagan - [Github](https://github.com/aaronfagan), [Website](https://www.aaronfagan.ca/)

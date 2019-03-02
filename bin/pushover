@@ -35,11 +35,8 @@ Example:
 	--message \"Here is the notification!\"
 	"
 }
-
-upgrade() {  }
-
-configure() {  }
-
+# upgrade() {  }
+# configure() {  }
 
 while [[ $# -gt 0 ]]
 do

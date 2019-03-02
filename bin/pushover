@@ -9,7 +9,7 @@ PRIORITY="0"
 RETRY="60"
 EXPIRE="86400"
 ERROR=false
-VERSION="1.0.1"
+VERSION="1.0.0"
 
 usage() {
 	echo "
@@ -91,8 +91,8 @@ do
 			exit 0
 		;;
 		-v | --version)
-			echo -ne "\033[0;37m\nPushover CLI - v$VERSION\n\033[0m\n"
-			echo -ne "\033[0;37m\nBy Aaron Fagan (https://www.aaronfagan.ca/)\n\033[0m\n"
+			echo -ne "\033[0;37m\nPushover CLI - v$VERSION\033[0m\n"
+			echo -ne "\033[0;37mBy Aaron Fagan (https://www.aaronfagan.ca/)\033[0m\n\n"
 			exit 0
 		;;
 		--help)

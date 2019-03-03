@@ -85,7 +85,7 @@ do
 		--upgrade)
 			DIR_TEMP=/opt/pushover-cli
 			git clone git@github.com:aaronfagan/pushover-cli.git $DIR_TEMP > /dev/null 2>&1
-			find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash "$VERSION" {} \; && \
+			find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} \; && \
 			rm -rf $DIR_TEMP
 			exit 0
 		;;

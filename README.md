@@ -4,10 +4,7 @@ A command line tool for [Pushover](https://pushover.net/) notifications.
 ## Installation
 ```
 git clone git@github.com:aaronfagan/pushover-cli.git && \
-cd ./pushover-cli && \
-chmod +x ./scripts/install.sh && \
-bash ./scripts/install.sh && \
-cd .. && \
+find ./pushover-cli -type f -name "install.sh" -exec chmod +x {} \; -exec bash {} \; && \
 rm -rf ./pushover-cli
 ```
 

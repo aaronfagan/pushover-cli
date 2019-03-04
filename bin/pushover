@@ -35,7 +35,12 @@ Example:
 	--message \"Here is the notification!\"
 	"
 }
-# upgrade() {  }
+upgrade() {
+	DIR_TEMP=/opt/pushover-cli
+	git clone git@github.com:aaronfagan/pushover-cli.git $DIR_TEMP > /dev/null
+	find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} \;
+	rm -rf $DIR_TEMP
+}
 # configure() {  }
 
 while [[ $# -gt 0 ]]
@@ -83,10 +88,7 @@ do
 			shift
 		;;
 		--upgrade)
-			DIR_TEMP=/opt/pushover-cli
-			git clone git@github.com:aaronfagan/pushover-cli.git $DIR_TEMP > /dev/null 2>&1
-			find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} \; && \
-			rm -rf $DIR_TEMP
+			upgrade
 			exit 0
 		;;
 		-v | --version)

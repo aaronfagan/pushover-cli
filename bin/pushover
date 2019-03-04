@@ -63,14 +63,12 @@ configure() {
 		read USER_KEY
 		echo -ne "Pushover Application API Token: "
 		read APP_TOKEN
-		mkdir $HOME/.pushover
-		touch $HOME/.pushover/config
-		CONFIG=$(cat <<EOF
-USERKEY=$USER_KEY\n
+		if [ ! -d $HOME/.pushover ]; then mkdir $HOME/.pushover; fi
+		if [ -e $HOME/.pushover/config ]; then touch $HOME/.pushover/config; fi
+		cat <<EOF > $HOME/.pushover/config
+USERKEY=$USER_KEY
 APP_TOKEN=$APP_TOKEN
 EOF
-)
-	echo $CONFIG > $HOME/.pushover/config
 	fi
 	chmod 600 $HOME/.pushover/config
 	echo -ne "\nPushover CLI configured successfully.\n\n"

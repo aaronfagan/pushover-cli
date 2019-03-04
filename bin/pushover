@@ -8,9 +8,9 @@ HTML=""
 PRIORITY="0"
 RETRY="60"
 EXPIRE="86400"
-DIR_CONFIG="$HOME/.pushover"
-REPO="git@github.com:aaronfagan/pushover-cli.git"
 VERSION="1.0.3"
+REPO="git@github.com:aaronfagan/pushover-cli.git"
+DIR_CONFIG="$HOME/.pushover"
 
 configure() {
 	echo -ne '\033[0;37m'

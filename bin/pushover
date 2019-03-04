@@ -79,7 +79,7 @@ Options:
 	--expire 		How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
 	--configure 	Configure global Pushover user key and application API token. Set to 'rm' to remove configuration.
 	--upgrade 		Upgrade to the latest version of Pushover CLI.
-	--version		Currently installed version of Pushover CLI.
+	--version 		Currently installed version of Pushover CLI.
 	--help 			Usage instructions.
 Example:
 	pushover \\

@@ -13,6 +13,12 @@ VERSION="1.0.3"
 
 configure() {
 	echo -ne '\033[0;37m'
+	if [ $CONFIGURE = "rm" ]; then
+		rm -rf $HOME/.pushover
+		echo -ne "\nPushover CLI configuration deleted.\n\n"
+		echo -ne '\033[0m'
+		exit 0
+	fi
 	if [ -e $HOME/.pushover/config ]; then
 	    USER_KEY=$(awk -F'"' '/^USER_KEY=/ {print $2}' /root/.pushover/config)
 	    APP_TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $HOME/.pushover/config)
@@ -70,7 +76,7 @@ Options:
 	--priority 		Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
 	--retry 		How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
 	--expire 		How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
-	--configure 	Configure global Pushover user key and application API token.
+	--configure 	Configure global Pushover user key and application API token. Set to 'rm' to remove configuration.
 	--upgrade 		Upgrade to the latest version of Pushover CLI.
 	--version		Currently installed version of Pushover CLI.
 	--help 			Usage instructions.
@@ -127,6 +133,7 @@ while [[ $# -gt 0 ]]; do
 			shift
 		;;
 		--configure)
+			CONFIGURE="${2:-$CONFIGURE}"
 			configure
 			exit 0
 		;;

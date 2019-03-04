@@ -56,7 +56,7 @@ configure() {
 	echo -ne '\033[0;37m'
 	if [ -e $HOME/.pushover/config ]
 	then
-	    USER_KEY_CUR=$(awk -F'"' '/^USER_KEY=/ {print $2}' $HOME/.pushover/config)
+	    USER_KEY_CUR=$(awk -F'"' '/^USER_KEY=/ {print $2}' /root/.pushover/config)
 	    APP_TOKEN_CUR=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $HOME/.pushover/config)
 	    echo -ne "\nPushover User Key Test: $USER_KEY_CUR"
 		read USER_KEY
@@ -71,8 +71,8 @@ configure() {
 		if [ -e $HOME/.pushover/config ]; then touch $HOME/.pushover/config; fi
 	fi
 	cat <<EOF > $HOME/.pushover/config
-USER_KEY=$USER_KEY
-APP_TOKEN=$APP_TOKEN
+USER_KEY="$USER_KEY"
+APP_TOKEN="$APP_TOKEN"
 EOF
 	chmod 755 $HOME/.pushover/config
 	echo -ne "\nPushover CLI configured successfully.\n\n"

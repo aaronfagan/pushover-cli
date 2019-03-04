@@ -55,8 +55,8 @@ upgrade() {
 }
 version() {
 	echo -ne "\033[0;37m
-\nPushover CLI - v$VERSION\n
-By Aaron Fagan (https://www.aaronfagan.ca/)\n\n
+Pushover CLI - v$VERSION
+By Aaron Fagan (https://www.aaronfagan.ca/)
 \033[0m"
 }
 usage() {

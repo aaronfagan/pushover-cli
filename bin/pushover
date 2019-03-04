@@ -67,6 +67,7 @@ configure() {
 USERKEY=$USER_KEY
 APP_TOKEN=$APP_TOKEN
 EOF
+)
 	echo $CONFIG > $HOME/.pushover/config
 	fi
 	chmod 600 $HOME/.pushover/config

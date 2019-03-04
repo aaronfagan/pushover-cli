@@ -13,8 +13,7 @@ VERSION="1.0.3"
 
 configure() {
 	echo -ne '\033[0;37m'
-	if [ -e $HOME/.pushover/config ]
-	then
+	if [ -e $HOME/.pushover/config ]; then
 	    USER_KEY=$(awk -F'"' '/^USER_KEY=/ {print $2}' /root/.pushover/config)
 	    APP_TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $HOME/.pushover/config)
 	    echo -ne "\nUser Key [$USER_KEY]: "
@@ -40,8 +39,7 @@ EOF
 upgrade() {
 	DIR_TEMP=/opt/pushover-cli
 	git clone git@github.com:aaronfagan/pushover-cli.git $DIR_TEMP > /dev/null
-	if [ $? != 0 ];
-	then 
+	if [ $? != 0 ]; then 
 		find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} \;
 		rm -rf $DIR_TEMP
 		exit 0
@@ -85,8 +83,7 @@ Example:
 	"
 }
 
-while [[ $# -gt 0 ]]
-do
+while [[ $# -gt 0 ]]; do
 	key="$1"
 	case $key in
 		--token)
@@ -154,11 +151,19 @@ do
 	esac
 done
 
-if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]
-then
+if [ -e $HOME/.pushover/config ]; then
+    USER=$(awk -F'"' '/^USER_KEY=/ {print $2}' /root/.pushover/config)
+    TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $HOME/.pushover/config)
+fi
+
+if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]; then
 	echo -ne '\n'
-	if [ -z "$USER" ]; then echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"; fi
-	if [ -z "$TOKEN" ]; then echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n"; fi
+	if [ -z "$USER" ]; then 
+		echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"
+	fi
+	if [ -z "$TOKEN" ]; then
+		echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n";
+	fi
 	if [ -z "$MESSAGE" ]; then echo -ne "\033[0;31mERROR:\033[0;37m --message arguement is required.\033[0m\n"; fi
 	usage
 	exit 1
@@ -175,8 +180,7 @@ else
 		-F "message=${MESSAGE}" \
 		https://api.pushover.net/1/messages.json \
 	| grep 'errors' > /dev/null 2>&1
-	if [ $? != 0 ];
-	then 
+	if [ $? != 0 ];	then 
 		echo -ne "success!\n\n";
 		echo -ne '\033[0m'
 		exit 0

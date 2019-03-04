@@ -163,7 +163,7 @@ if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]; then
 	echo -ne '\n'
 	if [ -z "$USER" ]; then 
 		if [ -e $DIR_CONFIG/config ]; then
-		    USER=$(awk -F'"' '/^USER_KEY=/ {print $2}' /root/.pushover/config)
+		    USER=$(awk -F'"' '/^USER_KEY=/ {print $2}' $DIR_CONFIG/config)
 		    if [ -z "$USER" ]; then
 		    	echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"
 		    fi
@@ -173,7 +173,7 @@ if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]; then
 	fi
 	if [ -z "$TOKEN" ]; then
 		if [ -e $DIR_CONFIG/config ]; then
-		    TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' /root/.pushover/config)
+		    TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $DIR_CONFIG/config)
 		    if [ -z "$TOKEN" ]; then
 		    	echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n"
 		    fi

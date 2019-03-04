@@ -74,7 +74,7 @@ configure() {
 USER_KEY=$USER_KEY
 APP_TOKEN=$APP_TOKEN
 EOF
-	chmod 600 $HOME/.pushover/config
+	chmod 755 $HOME/.pushover/config
 	echo -ne "\nPushover CLI configured successfully.\n\n"
 	echo -ne '\033[0m'
 }

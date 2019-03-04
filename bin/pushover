@@ -52,7 +52,26 @@ upgrade() {
 		exit 1
 	fi
 }
-# configure() {  }
+configure() {
+	echo -ne '\033[0;37m'
+	if [ -e $HOME/.pushover/config ]
+	then
+	    USER_KEY=$(awk -F'"' '/^USER_KEY=/ {print $2}' $HOME/.pushover/config)
+	    APP_TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $HOME/.pushover/config)
+	else
+		echo -ne "\nPushover User Key: "
+		read USER_KEY
+		echo -ne "\nPushover Application API Token: "
+		read APP_TOKEN
+		cat > $HOME/.pushover/config << EOF
+USERKEY=$USER_KEY
+APP_TOKEN=$APP_TOKEN
+EOF
+	fi
+	chmod 600 $HOME/.pushover/config
+	echo -ne "\n\nPushover CLI configured successfully.\n\n"
+	echo -ne '\033[0m'
+}
 
 while [[ $# -gt 0 ]]
 do

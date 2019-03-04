@@ -44,7 +44,7 @@ EOF
 	echo -ne '\033[0m'
 }
 upgrade() {
-	DIR_TEMP=/opt/pushover-cli
+	DIR_TEMP=/tmp/pushover-cli
 	git clone $REPO $DIR_TEMP
 	if [ $? == 0 ]; then 
 		find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} \;

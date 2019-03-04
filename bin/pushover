@@ -181,7 +181,7 @@ if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]; then
 	exit 1
 else
 	echo -ne '\033[0;37m'
-	echo -ne "\n> Sending notification..."
+	echo -ne "> Sending notification..."
 	/usr/bin/curl -s \
 		-F "token=${TOKEN}" \
 		-F "user=${USER}" \

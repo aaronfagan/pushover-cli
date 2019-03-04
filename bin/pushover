@@ -57,7 +57,7 @@ version() {
 	echo -ne "\033[0;37m
 Pushover CLI - v$VERSION
 By Aaron Fagan (https://www.aaronfagan.ca/)
-\033[0m"
+\033[0m\n"
 }
 usage() {
 	echo "

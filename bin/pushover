@@ -8,9 +8,8 @@ HTML=""
 PRIORITY="0"
 RETRY="60"
 EXPIRE="86400"
-ERROR=false
-VERSION="1.0.3"
 DIR_CONFIG="$HOME/.pushover"
+VERSION="1.0.3"
 
 configure() {
 	echo -ne '\033[0;37m'

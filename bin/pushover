@@ -61,7 +61,7 @@ configure() {
 	else
 		echo -ne "\nPushover User Key: "
 		read USER_KEY
-		echo -ne "\nPushover Application API Token: "
+		echo -ne "Pushover Application API Token: "
 		read APP_TOKEN
 		CONFIG=$(cat <<EOF
 USERKEY=$USER_KEY

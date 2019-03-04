@@ -151,18 +151,27 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
-if [ -e $HOME/.pushover/config ]; then
-    USER=$(awk -F'"' '/^USER_KEY=/ {print $2}' /root/.pushover/config)
-    TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $HOME/.pushover/config)
-fi
-
 if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]; then
 	echo -ne '\n'
 	if [ -z "$USER" ]; then 
-		echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"
+		if [ -e $HOME/.pushover/config ]; then
+		    USER=$(awk -F'"' '/^USER_KEY=/ {print $2}' /root/.pushover/config)
+		    if [ -z "$USER" ]; then
+		    	echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"
+		    fi
+		else
+			echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"
+		fi
 	fi
 	if [ -z "$TOKEN" ]; then
-		echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n";
+		if [ -e $HOME/.pushover/config ]; then
+		    TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' /root/.pushover/config)
+		    if [ -z "$TOKEN" ]; then
+		    	echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n"
+		    fi
+		else
+			echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n"
+		fi
 	fi
 	if [ -z "$MESSAGE" ]; then echo -ne "\033[0;31mERROR:\033[0;37m --message arguement is required.\033[0m\n"; fi
 	usage

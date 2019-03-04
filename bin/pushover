@@ -58,9 +58,9 @@ configure() {
 	then
 	    USER_KEY_CUR=$(awk -F'"' '/^USER_KEY=/ {print $2}' /root/.pushover/config)
 	    APP_TOKEN_CUR=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $HOME/.pushover/config)
-	    echo -ne "\nPushover User Key Test: $USER_KEY_CUR"
+	    echo -ne "\nPushover User Key ($USER_KEY_CUR): "
 		read USER_KEY
-		echo -ne "Pushover Application API Token Test: $APP_TOKEN_CUR"
+		echo -ne "Pushover Application API Token ($APP_TOKEN_CUR): "
 		read APP_TOKEN
 	else
 		echo -ne "\nPushover User Key: "

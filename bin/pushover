@@ -14,7 +14,7 @@ DIR_CONFIG="$HOME/.pushover"
 
 configure() {
 	echo -ne '\033[0;37m'
-	if [ -n "$CONFIGURE" ] && [ $CONFIGURE == "rm" ]; then
+	if [ -n "$CONFIGURE" ] && [ $CONFIGURE == "delete" ]; then
 		rm -rf $DIR_CONFIG
 		echo -ne "\nPushover CLI configuration deleted.\n\n"
 		echo -ne '\033[0m'
@@ -77,7 +77,7 @@ Options:
 	--priority 			Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
 	--retry 			How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
 	--expire 			How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
-	--configure 			Configure global Pushover user key and application API token. Set to 'rm' to remove configuration.
+	--configure 			Configure global Pushover user key and application API token. Set to 'delete' to remove configuration files.
 	--upgrade 			Upgrade to the latest version of Pushover CLI.
 	--version 			Currently installed version of Pushover CLI.
 	--help 				Usage instructions.

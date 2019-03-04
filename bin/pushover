@@ -63,6 +63,7 @@ configure() {
 		read USER_KEY
 		echo -ne "Pushover Application API Token: "
 		read APP_TOKEN
+		mkdir $HOME/.pushover
 		touch $HOME/.pushover/config
 		CONFIG=$(cat <<EOF
 USERKEY=$USER_KEY

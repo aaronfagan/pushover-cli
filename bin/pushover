@@ -9,24 +9,25 @@ PRIORITY="0"
 RETRY="60"
 EXPIRE="86400"
 ERROR=false
-VERSION="1.0.2"
+VERSION="1.0.3"
 
 usage() {
 	echo "
 Usage:
 	pushover [options]
 Options:
-	--user 		Pushover user key. REQUIRED.
-	--token 	Pushover application API token. REQUIRED.
-	--title 	Notification title.
-	--message 	Notification message. REQUIRED.
-	--html 		Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
-	--priority 	Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
-	--retry 	How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
-	--expire 	How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
-	--upgrade 	Upgrade to the latest version of Pushover CLI.
-	--version	Currently installed version of Pushover CLI.
-	--help 		Usage instructions.
+	--user 			Pushover user key. REQUIRED.
+	--token 		Pushover application API token. REQUIRED.
+	--title 		Notification title.
+	--message 		Notification message. REQUIRED.
+	--html 			Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
+	--priority 		Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
+	--retry 		How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
+	--expire 		How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
+	--configure 	Configure global Pushover user key and application API token.
+	--upgrade 		Upgrade to the latest version of Pushover CLI.
+	--version		Currently installed version of Pushover CLI.
+	--help 			Usage instructions.
 Example:
 	pushover \\
 	--user YOUR_USER_KEY \\
@@ -38,8 +39,18 @@ Example:
 upgrade() {
 	DIR_TEMP=/opt/pushover-cli
 	git clone git@github.com:aaronfagan/pushover-cli.git $DIR_TEMP > /dev/null
-	find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} \;
-	rm -rf $DIR_TEMP
+	if [ $? != 0 ];
+	then 
+		find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} \;
+		rm -rf $DIR_TEMP
+		exit 0
+	else
+		rm -rf $DIR_TEMP
+		echo -ne '\033[0;37m'
+		echo -ne "\nPushover CLI upgraded failed.\n\n"
+		echo -ne '\033[0m'
+		exit 1
+	fi
 }
 # configure() {  }
 
@@ -87,9 +98,12 @@ do
 			shift
 			shift
 		;;
+		--configure)
+			configure
+			exit 0
+		;;
 		--upgrade)
 			upgrade
-			exit 0
 		;;
 		-v | --version)
 			echo -ne "\033[0;37m\nPushover CLI - v$VERSION\033[0m\n"

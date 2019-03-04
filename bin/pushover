@@ -69,18 +69,18 @@ usage() {
 Usage:
 	pushover [options]
 Options:
-	--user 			Pushover user key. REQUIRED.
-	--token 		Pushover application API token. REQUIRED.
-	--title 		Notification title.
-	--message 		Notification message. REQUIRED.
-	--html 			Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
-	--priority 		Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
-	--retry 		How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
-	--expire 		How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
-	--configure 	Configure global Pushover user key and application API token. Set to 'rm' to remove configuration.
-	--upgrade 		Upgrade to the latest version of Pushover CLI.
-	--version 		Currently installed version of Pushover CLI.
-	--help 			Usage instructions.
+	--user 				Pushover user key. REQUIRED.
+	--token 			Pushover application API token. REQUIRED.
+	--title 			Notification title.
+	--message 			Notification message. REQUIRED.
+	--html 				Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
+	--priority 			Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
+	--retry 			How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
+	--expire 			How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
+	--configure 			Configure global Pushover user key and application API token. Set to 'rm' to remove configuration.
+	--upgrade 			Upgrade to the latest version of Pushover CLI.
+	--version 			Currently installed version of Pushover CLI.
+	--help 				Usage instructions.
 Example:
 	pushover \\
 	--user YOUR_USER_KEY \\

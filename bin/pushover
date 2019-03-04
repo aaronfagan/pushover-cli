@@ -66,7 +66,7 @@ configure() {
 		mkdir $HOME/.pushover
 		touch $HOME/.pushover/config
 		CONFIG=$(cat <<EOF
-USERKEY=$USER_KEY
+USERKEY=$USER_KEY\n
 APP_TOKEN=$APP_TOKEN
 EOF
 )

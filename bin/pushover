@@ -8,7 +8,7 @@ HTML=""
 PRIORITY="0"
 RETRY="60"
 EXPIRE="86400"
-VERSION="1.0.7"
+VERSION="1.1.0"
 REPO="git@github.com:aaronfagan/pushover-cli.git"
 DIR_CONFIG="$HOME/.pushover"
 

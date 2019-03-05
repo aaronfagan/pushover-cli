@@ -48,16 +48,16 @@ upgrade() {
 	if [ -z "$UPGRADE" ]; then UPGRADE="master"; fi
 	echo -ne '\033[0;37m'
 	echo -ne "\nDownloading latest version..."
-	git clone --branch $UPGRADE --depth 1 $REPO $DIR_TEMP -q
+	git clone --branch $UPGRADE --depth 1 $REPO $DIR_TEMP > /dev/null 2>&1
 	if [ $? == 0 ]; then
-		echo -ne "done!\n"
+		echo -ne "done!"
 		find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} $DIR_TEMP \;
 		rm -rf $DIR_TEMP
 		echo -ne '\033[0m'
 		exit 0
 	else
 		rm -rf $DIR_TEMP
-		echo -ne "failed!\n"
+		echo -ne "failed!"
 		echo -ne "\nPushover CLI upgrade failed.\n\n"
 		echo -ne '\033[0m'
 		exit 1

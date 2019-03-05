@@ -47,7 +47,7 @@ upgrade() {
 	DIR_TEMP=/tmp/pushover-cli
 	git clone $REPO $DIR_TEMP
 	if [ $? == 0 ]; then 
-		find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} \;
+		find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} $DIR_TEMP \;
 		rm -rf $DIR_TEMP
 		exit 0
 	else

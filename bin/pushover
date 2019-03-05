@@ -57,7 +57,7 @@ upgrade() {
 		exit 0
 	else
 		rm -rf $DIR_TEMP
-		echo -ne "failed!\n"
+		echo -ne "failed!"
 		echo -ne "\nPushover CLI upgrade failed.\n\n"
 		echo -ne '\033[0m'
 		exit 1

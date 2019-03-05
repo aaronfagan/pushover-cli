@@ -7,7 +7,7 @@ VERSION_NEW=$(awk -F'"' '/^VERSION=/ {print $2}' $DIR_BIN_TEMP/pushover)
 if [ "$VERSION_OLD" == "$VERSION_NEW" ]
 then
 	echo -ne '\033[0;37m'
-	echo -ne "\nPushover CLI is already the latest version (v$VERSION_OLD). Test: $1\n\n"
+	echo -ne "\nPushover CLI is already the latest version (v$VERSION_OLD). Test\n\n"
 	echo -ne '\033[0m'
 else
 	cp $DIR_BIN_TEMP/pushover $DIR_BIN_LOCAL/pushover

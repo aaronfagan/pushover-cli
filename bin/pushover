@@ -46,7 +46,7 @@ EOF
 upgrade() {
 	DIR_TEMP=/tmp/pushover-cli
 	if [ -z "$UPGRADE" ]; then UPGRADE="master"; fi
-	git clone --branch $UPGRADE --depth 1 $REPO $DIR_TEMP
+	git clone --branch $UPGRADE --depth 1 $REPO $DIR_TEMP -q
 	if [ $? == 0 ]; then 
 		find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} $DIR_TEMP \;
 		rm -rf $DIR_TEMP

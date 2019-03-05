@@ -45,7 +45,8 @@ EOF
 }
 upgrade() {
 	DIR_TEMP=/tmp/pushover-cli
-	git clone $REPO $DIR_TEMP
+	if [ -z "$UPGRADE" ]; then UPGRADE="master"; fi
+	git clone --branch $UPGRADE --depth 1 $REPO $DIR_TEMP
 	if [ $? == 0 ]; then 
 		find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} $DIR_TEMP \;
 		rm -rf $DIR_TEMP
@@ -140,6 +141,7 @@ while [[ $# -gt 0 ]]; do
 			exit 0
 		;;
 		--upgrade)
+			UPGRADE="${2:-$UPGRADE}"
 			upgrade
 		;;
 		-v | --version)

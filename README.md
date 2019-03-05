@@ -1,7 +1,6 @@
 # Pushover CLI
 A command line tool for [Pushover](https://pushover.net/) notifications. This project is not written, maintained, or supported by Superblock (the creators of Pushover), and is not an official tool.
 
-
 ## Installation
 ```
 git clone git@github.com:aaronfagan/pushover-cli.git && \

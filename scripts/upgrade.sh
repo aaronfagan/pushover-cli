@@ -1,6 +1,7 @@
 #!/bin/bash
 DIR_BIN_LOCAL="/usr/local/bin"
 DIR_BIN_TEMP="$1/bin"
+echo "VAR: $1"
 VERSION_OLD=$(awk -F'"' '/^VERSION=/ {print $2}' $DIR_BIN_LOCAL/pushover)
 VERSION_NEW=$(awk -F'"' '/^VERSION=/ {print $2}' $DIR_BIN_TEMP/pushover)
 if [ "$VERSION_OLD" == "$VERSION_NEW" ]

@@ -9,13 +9,18 @@ find ./pushover-cli -type f -name "install.sh" -exec chmod +x {} \; -exec bash {
 rm -rf ./pushover-cli
 ```
 
-## Upgrade
+## Usage
+Run `pushover --help` for usage instructions.
+
+### Configuration
+```
+pushover --configure
+```
+
+### Upgrade
 ```
 pushover --upgrade
 ```
-
-## Usage
-- Run `pushover --help` for usage instructions.
 
 # Contributors
 * Aaron Fagan - [Github](https://github.com/aaronfagan), [Website](https://www.aaronfagan.ca/)

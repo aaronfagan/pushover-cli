@@ -69,6 +69,8 @@ version() {
 Pushover CLI - v$VERSION
 https://github.com/aaronfagan/pushover-cli
 By Aaron Fagan (https://www.aaronfagan.ca/)
+
+This project is not written, maintained, or supported by Superblock (the creators of Pushover), and is not an official tool.
 \033[0m\n"
 }
 usage() {

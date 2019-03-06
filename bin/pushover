@@ -85,7 +85,7 @@ Options:
 	--device        The target device(s) to send the notification to. Comma separated, no spaces. DEFAULT = All devices.
 	--sound	        The notification sound to play upon delivery, see: https://pushover.net/api#sounds.
 	--html          Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
-	--timestamp	    A Unix timestamp of your message's date and time to display to the user. DEFAULT = The time your message is received by the Pushover API.
+	--timestamp     A Unix timestamp of your message's date and time to display to the user. DEFAULT = The time your message is received by the Pushover API.
 	--priority      Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
 	--retry         How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
 	--expire        How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.

@@ -130,7 +130,7 @@ while [[ $# -gt 0 ]]; do
 			shift
 			shift
 		;;
-		--urltitle)
+		--url-title)
 			URL_TITLE="${2:-$URL_TITLE}"
 			shift
 			shift

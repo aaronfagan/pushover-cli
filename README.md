@@ -17,13 +17,13 @@ pushover --config
 ```
 
 ### Upgrade
-This option will upgrade to the latest release.
+This option will upgrade to the latest release version.
 ```
 pushover --upgrade
 ```
 
-### Upgrade/Downgrade
-You can upgrade or downgrade to any release version by specifying the version number, like `v1.1.0`.
+### Downgrade
+You can downgrade to any previous release version by specifying the version number, like `v1.1.0`. For a complete list of available versions, see [here](https://github.com/aaronfagan/pushover-cli/releases).
 ```
 pushover --upgrade v1.1.0
 ```

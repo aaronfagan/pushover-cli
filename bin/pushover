@@ -13,7 +13,7 @@ REPO="git@github.com:aaronfagan/pushover-cli.git"
 DIR_CONFIG="$HOME/.pushover"
 
 config() {
-	LABEL_USER_KEY="Test User Key"
+	LABEL_USER_KEY="User Key"
 	LABEL_API_TOKEN="API Token"
 	echo -ne '\033[0;37m\n'
 	if [ -n "$CONFIG" ] && [ $CONFIG == "delete" ]; then

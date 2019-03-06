@@ -45,13 +45,13 @@ EOF
 	echo -ne '\033[0m'
 }
 upgrade() {
-	REPO="git@github.com:aaronfagan/pushover-cli.git"
+	REPOSITORY="git@github.com:aaronfagan/pushover-cli.git"
 	DIR_TEMP=/tmp/pushover-cli
 	if [ -z "$UPGRADE" ]; then UPGRADE="master"; fi
 	if [ $UPGRADE == "dev" ]; then UPGRADE="develop"; fi
 	echo -ne '\033[0;37m'
 	echo -ne "\nDownloading latest version..."
-	git clone --branch $UPGRADE --depth 1 $REPO $DIR_TEMP > /dev/null 2>&1
+	git clone --branch $UPGRADE --depth 1 $REPOSITORY $DIR_TEMP > /dev/null 2>&1
 	if [ $? == 0 ]; then
 		echo -ne "done!"
 		find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} $DIR_TEMP \;

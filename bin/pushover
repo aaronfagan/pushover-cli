@@ -30,7 +30,7 @@ config() {
 	else
 		echo -ne "\nUser Key: "
 		read USER_KEY
-		echo -ne "Application API Token: "
+		echo -ne "API Token: "
 		read APP_TOKEN
 		if [ ! -d $DIR_CONFIG ]; then mkdir $DIR_CONFIG; fi
 		if [ -e $DIR_CONFIG/config ]; then touch $DIR_CONFIG/config; fi

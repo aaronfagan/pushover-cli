@@ -9,7 +9,6 @@ PRIORITY="0"
 RETRY="60"
 EXPIRE="86400"
 VERSION="1.1.1"
-REPO="git@github.com:aaronfagan/pushover-cli.git"
 DIR_CONFIG="$HOME/.pushover"
 
 config() {
@@ -46,6 +45,7 @@ EOF
 	echo -ne '\033[0m'
 }
 upgrade() {
+	REPO="git@github.com:aaronfagan/pushover-cli.git"
 	DIR_TEMP=/tmp/pushover-cli
 	if [ -z "$UPGRADE" ]; then UPGRADE="master"; fi
 	if [ $UPGRADE == "dev" ]; then UPGRADE="develop"; fi

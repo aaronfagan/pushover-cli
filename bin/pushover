@@ -23,7 +23,7 @@ config() {
 	if [ -e $DIR_CONFIG/config ]; then
 	    USER_KEY=$(awk -F'"' '/^USER_KEY=/ {print $2}' $DIR_CONFIG/config)
 	    APP_TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $DIR_CONFIG/config)
-	    echo -ne "\nUser Key [************${USER_KEY: -6}]: "
+	    echo -ne "\nUser Key [************${USER_KEY: -4}]: "
 		read USER_KEY
 		echo -ne "Application API Token [$APP_TOKEN]: "
 		read APP_TOKEN

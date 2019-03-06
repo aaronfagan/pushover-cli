@@ -81,7 +81,7 @@ Options:
 	--title 			Notification title.
 	--message 			Notification message. REQUIRED.
 	--url 				A supplementary URL to show with your message.
-	--url-title 		A title for your supplementary URL, otherwise just the URL is shown.
+	--url-title 				A title for your supplementary URL, otherwise just the URL is shown.
 	--device			The target device(s) to send the notification to. Comma separated, no spaces. DEFAULT = All devices.
 	--sound				The notification sound to play upon delivery, see: https://pushover.net/api#sounds.
 	--html 				Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
@@ -130,7 +130,7 @@ while [[ $# -gt 0 ]]; do
 			shift
 			shift
 		;;
-		--url-title)
+		--urltitle)
 			URL_TITLE="${2:-$URL_TITLE}"
 			shift
 			shift

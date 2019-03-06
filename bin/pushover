@@ -8,13 +8,13 @@ HTML=""
 PRIORITY="0"
 RETRY="60"
 EXPIRE="86400"
-VERSION="1.1.0"
+VERSION="1.1.1"
 REPO="git@github.com:aaronfagan/pushover-cli.git"
 DIR_CONFIG="$HOME/.pushover"
 
-configure() {
+config() {
 	echo -ne '\033[0;37m'
-	if [ -n "$CONFIGURE" ] && [ $CONFIGURE == "delete" ]; then
+	if [ -n "$CONFIG" ] && [ $CONFIG == "delete" ]; then
 		rm -rf $DIR_CONFIG
 		echo -ne "\nPushover CLI configuration deleted.\n\n"
 		echo -ne '\033[0m'
@@ -46,6 +46,7 @@ EOF
 upgrade() {
 	DIR_TEMP=/tmp/pushover-cli
 	if [ -z "$UPGRADE" ]; then UPGRADE="master"; fi
+	if [ $UPGRADE == "dev" ]; then UPGRADE="develop"; fi
 	echo -ne '\033[0;37m'
 	echo -ne "\nDownloading latest version..."
 	git clone --branch $UPGRADE --depth 1 $REPO $DIR_TEMP > /dev/null 2>&1
@@ -65,9 +66,9 @@ upgrade() {
 }
 version() {
 	echo -ne "\033[0;37m
-Pushover CLI - v$VERSION
-https://github.com/aaronfagan/pushover-cli
-By Aaron Fagan (https://www.aaronfagan.ca/)
+Pushover CLI - v$VERSION - https://github.com/aaronfagan/pushover-cli
+This project is not written, maintained, or supported by Superblock (the creators of Pushover), and is not an official tool.
+By Aaron Fagan - https://www.aaronfagan.ca/
 \033[0m\n"
 }
 usage() {
@@ -75,18 +76,23 @@ usage() {
 Usage:
 	pushover [options]
 Options:
-	--user 				Pushover user key. REQUIRED.
-	--token 			Pushover application API token. REQUIRED.
-	--title 			Notification title.
-	--message 			Notification message. REQUIRED.
-	--html 				Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
-	--priority 			Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
-	--retry 			How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
-	--expire 			How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
-	--configure 			Configure global Pushover user key and application API token. Set to 'delete' to remove configuration files.
-	--upgrade 			Upgrade to the latest version of Pushover CLI.
-	--version 			Currently installed version of Pushover CLI.
-	--help 				Usage instructions.
+	--user          Pushover user key. REQUIRED.
+	--token         Pushover application API token. REQUIRED.
+	--title         Notification title.
+	--message       Notification message. REQUIRED.
+	--url           A supplementary URL to show with your message.
+	--url-title     A title for your supplementary URL, otherwise just the URL is shown.
+	--device        The target device(s) to send the notification to. Comma separated, no spaces. DEFAULT = All devices.
+	--sound	        The notification sound to play upon delivery, see: https://pushover.net/api#sounds.
+	--html          Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
+	--timestamp     A Unix timestamp of your message's date and time to display to the user. DEFAULT = The time your message is received by the Pushover API.
+	--priority      Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
+	--retry         How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
+	--expire        How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
+	--config        Configure global Pushover user key and application API token. Set to 'delete' to remove configuration files.
+	--upgrade       Upgrade to the latest version of Pushover CLI.
+	--version       Currently installed version of Pushover CLI.
+	--help          Usage instructions.
 Example:
 	pushover \\
 	--user YOUR_USER_KEY \\
@@ -119,8 +125,33 @@ while [[ $# -gt 0 ]]; do
 			shift
 			shift
 		;;
+		--url)
+			URL="${2:-$URL}"
+			shift
+			shift
+		;;
+		--url-title)
+			URL_TITLE="${2:-$URL_TITLE}"
+			shift
+			shift
+		;;
+		--device)
+			DEVICE="${2:-$DEVICE}"
+			shift
+			shift
+		;;
+		--sound)
+			SOUND="${2:-$SOUND}"
+			shift
+			shift
+		;;
 		--html)
 			HTML="${2:-$HTML}"
+			shift
+			shift
+		;;
+		--timestamp)
+			TIMESTAMP="${2:-$TIMESTAMP}"
 			shift
 			shift
 		;;
@@ -139,9 +170,9 @@ while [[ $# -gt 0 ]]; do
 			shift
 			shift
 		;;
-		--configure)
-			CONFIGURE="${2:-$CONFIGURE}"
-			configure
+		--config)
+			CONFIG="${2:-$CONFIG}"
+			config
 			exit 0
 		;;
 		--upgrade)
@@ -201,10 +232,16 @@ else
 		-F "token=${TOKEN}" \
 		-F "user=${USER}" \
 		-F "title=${TITLE}" \
+		-F "message=${MESSAGE}" \
+		-F "url=${URL}" \
+		-F "url_title=${URL_TITLE}" \
+		-F "device=${DEVICE}" \
+		-F "sound=${SOUND}" \
+		-F "html=${HTML}" \
+		-F "timestamp=${TIMESTAMP}" \
 		-F "priority=${PRIORITY}" \
 		-F "retry=${RETRY}" \
 		-F "expire=${EXPIRE}" \
-		-F "message=${MESSAGE}" \
 		https://api.pushover.net/1/messages.json \
 	| grep 'errors' > /dev/null 2>&1
 	if [ $? != 0 ];	then 

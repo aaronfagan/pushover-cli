@@ -13,7 +13,7 @@ Run `pushover --help` for usage instructions.
 
 ### Configuration
 ```
-pushover --configure
+pushover --config
 ```
 
 ### Upgrade

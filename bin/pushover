@@ -76,23 +76,23 @@ usage() {
 Usage:
 	pushover [options]
 Options:
-	--user 				Pushover user key. REQUIRED.
-	--token 			Pushover application API token. REQUIRED.
-	--title 			Notification title.
-	--message 			Notification message. REQUIRED.
-	--url 				A supplementary URL to show with your message.
-	--url-title 			A title for your supplementary URL, otherwise just the URL is shown.
-	--device			The target device(s) to send the notification to. Comma separated, no spaces. DEFAULT = All devices.
-	--sound				The notification sound to play upon delivery, see: https://pushover.net/api#sounds.
-	--html 				Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
-	--timestamp			A Unix timestamp of your message's date and time to display to the user. DEFAULT = The time your message is received by the Pushover API.
-	--priority 			Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
-	--retry 			How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
-	--expire 			How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
-	--config 			Configure global Pushover user key and application API token. Set to 'delete' to remove configuration files.
-	--upgrade 			Upgrade to the latest version of Pushover CLI.
-	--version 			Currently installed version of Pushover CLI.
-	--help 				Usage instructions.
+	--user 			Pushover user key. REQUIRED.
+	--token 		Pushover application API token. REQUIRED.
+	--title 		Notification title.
+	--message 		Notification message. REQUIRED.
+	--url 			A supplementary URL to show with your message.
+	--url-title 		A title for your supplementary URL, otherwise just the URL is shown.
+	--device		The target device(s) to send the notification to. Comma separated, no spaces. DEFAULT = All devices.
+	--sound			The notification sound to play upon delivery, see: https://pushover.net/api#sounds.
+	--html 			Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
+	--timestamp		A Unix timestamp of your message's date and time to display to the user. DEFAULT = The time your message is received by the Pushover API.
+	--priority 		Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
+	--retry 		How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
+	--expire 		How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
+	--config 		Configure global Pushover user key and application API token. Set to 'delete' to remove configuration files.
+	--upgrade 		Upgrade to the latest version of Pushover CLI.
+	--version 		Currently installed version of Pushover CLI.
+	--help 			Usage instructions.
 Example:
 	pushover \\
 	--user YOUR_USER_KEY \\

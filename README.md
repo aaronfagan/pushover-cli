@@ -22,8 +22,8 @@ This option will upgrade to the latest release.
 pushover --upgrade
 ```
 
-### Upgrade/Downgrade to a Specific Release
-You can specify a release version you would like to upgrade or downgrade to with version number, like `v1.1.0`.
+### Upgrade/Downgrade
+You can upgrade or downgrade to any version by specifying the version number, like `v1.1.0`.
 ```
 pushover --upgrade v1.1.0
 ```

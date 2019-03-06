@@ -17,7 +17,7 @@ pushover --config
 ```
 
 ### Upgrade
-This option will upgrade to the latest release.
+This option will upgrade to the latest release version.
 ```
 pushover --upgrade
 ```

@@ -23,6 +23,8 @@ config() {
 	if [ -e $DIR_CONFIG/config ]; then
 	    USER_KEY=$(awk -F'"' '/^USER_KEY=/ {print $2}' $DIR_CONFIG/config)
 	    APP_TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $DIR_CONFIG/config)
+	    if [ -z "$USER_KEY" ]; then echo -ne "\nUser Key: "; else echo -ne "\nUser Key [****************${USER_KEY: -4}]: "; fi
+	    if [ -z "$APP_TOKEN" ]; then echo -ne "API Token: "; else echo -ne "API Token [****************${APP_TOKEN: -4}]: "; fi
 	    echo -ne "\nUser Key [****************${USER_KEY: -4}]: "
 		read USER_KEY
 		echo -ne "API Token [****************${APP_TOKEN: -4}]: "

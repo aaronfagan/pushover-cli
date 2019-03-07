@@ -9,4 +9,3 @@ if [ "$VERSION_OLD" == "$VERSION_NEW" ]; then
 else
 	echo -ne "\nPushover CLI upgraded successfully (v$2 => v$VERSION_NEW).\n\n"
 fi
-

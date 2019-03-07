@@ -60,7 +60,7 @@ upgrade() {
 	git clone --branch $UPGRADE --depth 1 $REPOSITORY $DIR_TEMP > /dev/null 2>&1
 	if [ $? == 0 ]; then
 		echo -ne "done!"
-		find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} $DIR_TEMP \;
+		find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} $DIR_TEMP $VERSION \;
 		rm -rf $DIR_TEMP
 		echo -ne '\033[0m'
 		exit 0

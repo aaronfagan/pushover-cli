@@ -240,7 +240,7 @@ else
 		-F "token=${TOKEN}" \
 		-F "user=${USER}" \
 		-F "title=${TITLE}" \
-		-F "message=${MESSAGE}" \
+		-F "message=$(echo -ne ${MESSAGE})" \
 		-F "url=${URL}" \
 		-F "url_title=${URL_TITLE}" \
 		-F "device=${DEVICE}" \

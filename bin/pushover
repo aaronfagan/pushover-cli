@@ -8,25 +8,93 @@ HTML=""
 PRIORITY="0"
 RETRY="60"
 EXPIRE="86400"
-ERROR=false
-VERSION="1.0.2"
+VERSION="1.1.1"
+DIR_CONFIG="$HOME/.pushover"
 
+config() {
+	LABEL_USER_KEY="User Key"
+	LABEL_API_TOKEN="API Token"
+	echo -ne '\033[0;37m\n'
+	if [ -n "$CONFIG" ] && [ $CONFIG == "delete" ]; then
+		rm -rf $DIR_CONFIG
+		echo -ne "Pushover CLI configuration deleted.\n\n"
+		echo -ne '\033[0m'
+		exit 0
+	fi
+	if [ -e $DIR_CONFIG/config ]; then
+	    USER_KEY=$(awk -F'"' '/^USER_KEY=/ {print $2}' $DIR_CONFIG/config)
+	    APP_TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $DIR_CONFIG/config)
+	    if [ -z "$USER_KEY" ]; then echo -ne "$LABEL_USER_KEY: "; else echo -ne "$LABEL_USER_KEY [****************${USER_KEY: -4}]: "; fi
+	    read USER_KEY
+	    if [ -z "$APP_TOKEN" ]; then echo -ne "$LABEL_API_TOKEN: "; else echo -ne "$LABEL_API_TOKEN [****************${APP_TOKEN: -4}]: "; fi
+	    read APP_TOKEN
+	else
+		echo -ne "$LABEL_USER_KEY: "
+		read USER_KEY
+		echo -ne "$LABEL_API_TOKEN: "
+		read APP_TOKEN
+		if [ ! -d $DIR_CONFIG ]; then mkdir $DIR_CONFIG; fi
+		if [ -e $DIR_CONFIG/config ]; then touch $DIR_CONFIG/config; fi
+	fi
+	cat <<EOF > $DIR_CONFIG/config
+USER_KEY="$USER_KEY"
+APP_TOKEN="$APP_TOKEN"
+EOF
+	chmod 600 $DIR_CONFIG/config
+	echo -ne "\nPushover CLI configured successfully.\n\n"
+	echo -ne '\033[0m'
+}
+upgrade() {
+	REPOSITORY="git@github.com:aaronfagan/pushover-cli.git"
+	DIR_TEMP=/tmp/pushover-cli
+	if [ -z "$UPGRADE" ]; then UPGRADE="master"; fi
+	if [ $UPGRADE == "dev" ]; then UPGRADE="develop"; fi
+	echo -ne '\033[0;37m'
+	echo -ne "\nDownloading latest version..."
+	git clone --branch $UPGRADE --depth 1 $REPOSITORY $DIR_TEMP > /dev/null 2>&1
+	if [ $? == 0 ]; then
+		echo -ne "done!"
+		find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} $DIR_TEMP \;
+		rm -rf $DIR_TEMP
+		echo -ne '\033[0m'
+		exit 0
+	else
+		rm -rf $DIR_TEMP
+		echo -ne "failed!"
+		echo -ne "\nPushover CLI upgrade failed.\n\n"
+		echo -ne '\033[0m'
+		exit 1
+	fi
+}
+version() {
+	echo -ne "\033[0;37m
+Pushover CLI - v$VERSION - https://github.com/aaronfagan/pushover-cli
+This project is not written, maintained, or supported by Superblock (the creators of Pushover), and is not an official tool.
+By Aaron Fagan - https://www.aaronfagan.ca/
+\033[0m\n"
+}
 usage() {
 	echo "
 Usage:
 	pushover [options]
 Options:
-	--user 		Pushover user key. REQUIRED.
-	--token 	Pushover application API token. REQUIRED.
-	--title 	Notification title.
-	--message 	Notification message. REQUIRED.
-	--html 		Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
-	--priority 	Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
-	--retry 	How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
-	--expire 	How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
-	--upgrade 	Upgrade to the latest version of Pushover CLI.
-	--version	Currently installed version of Pushover CLI.
-	--help 		Usage instructions.
+	--user          Pushover user key. REQUIRED.
+	--token         Pushover application API token. REQUIRED.
+	--title         Notification title.
+	--message       Notification message. REQUIRED.
+	--url           A supplementary URL to show with your message.
+	--url-title     A title for your supplementary URL, otherwise just the URL is shown.
+	--device        The target device(s) to send the notification to. Comma separated, no spaces. DEFAULT = All devices.
+	--sound	        The notification sound to play upon delivery, see: https://pushover.net/api#sounds.
+	--html          Enabled HTML message. Set to 1 to enable. See: https://pushover.net/api#html.
+	--timestamp     A Unix timestamp of your message's date and time to display to the user. DEFAULT = The time your message is received by the Pushover API.
+	--priority      Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
+	--retry         How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
+	--expire        How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
+	--config        Configure global Pushover user key and application API token. Set to 'delete' to remove configuration files.
+	--upgrade       Upgrade to the latest version of Pushover CLI.
+	--version       Currently installed version of Pushover CLI.
+	--help          Usage instructions.
 Example:
 	pushover \\
 	--user YOUR_USER_KEY \\
@@ -35,11 +103,8 @@ Example:
 	--message \"Here is the notification!\"
 	"
 }
-# upgrade() {  }
-# configure() {  }
 
-while [[ $# -gt 0 ]]
-do
+while [[ $# -gt 0 ]]; do
 	key="$1"
 	case $key in
 		--token)
@@ -62,8 +127,33 @@ do
 			shift
 			shift
 		;;
+		--url)
+			URL="${2:-$URL}"
+			shift
+			shift
+		;;
+		--url-title)
+			URL_TITLE="${2:-$URL_TITLE}"
+			shift
+			shift
+		;;
+		--device)
+			DEVICE="${2:-$DEVICE}"
+			shift
+			shift
+		;;
+		--sound)
+			SOUND="${2:-$SOUND}"
+			shift
+			shift
+		;;
 		--html)
 			HTML="${2:-$HTML}"
+			shift
+			shift
+		;;
+		--timestamp)
+			TIMESTAMP="${2:-$TIMESTAMP}"
 			shift
 			shift
 		;;
@@ -82,16 +172,17 @@ do
 			shift
 			shift
 		;;
-		--upgrade)
-			DIR_TEMP=/opt/pushover-cli
-			git clone git@github.com:aaronfagan/pushover-cli.git $DIR_TEMP > /dev/null 2>&1
-			find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} \; && \
-			rm -rf $DIR_TEMP
+		--config)
+			CONFIG="${2:-$CONFIG}"
+			config
 			exit 0
 		;;
+		--upgrade)
+			UPGRADE="${2:-$UPGRADE}"
+			upgrade
+		;;
 		-v | --version)
-			echo -ne "\033[0;37m\nPushover CLI - v$VERSION\033[0m\n"
-			echo -ne "\033[0;37mBy Aaron Fagan (https://www.aaronfagan.ca/)\033[0m\n\n"
+			version
 			exit 0
 		;;
 		--help)
@@ -108,29 +199,54 @@ do
 	esac
 done
 
-if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]
-then
+if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]; then
 	echo -ne '\n'
-	if [ -z "$USER" ]; then echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"; fi
-	if [ -z "$TOKEN" ]; then echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n"; fi
+	if [ -z "$USER" ]; then 
+		if [ -e $DIR_CONFIG/config ]; then
+		    USER=$(awk -F'"' '/^USER_KEY=/ {print $2}' $DIR_CONFIG/config)
+		    if [ -z "$USER" ]; then
+		    	echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"
+		    fi
+		else
+			echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"
+		fi
+	fi
+	if [ -z "$TOKEN" ]; then
+		if [ -e $DIR_CONFIG/config ]; then
+		    TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $DIR_CONFIG/config)
+		    if [ -z "$TOKEN" ]; then
+		    	echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n"
+		    fi
+		else
+			echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n"
+		fi
+	fi
 	if [ -z "$MESSAGE" ]; then echo -ne "\033[0;31mERROR:\033[0;37m --message arguement is required.\033[0m\n"; fi
+fi
+
+if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]; then
 	usage
 	exit 1
 else
 	echo -ne '\033[0;37m'
-	echo -ne "\n> Sending notification..."
+	echo -ne "> Sending notification..."
 	/usr/bin/curl -s \
 		-F "token=${TOKEN}" \
 		-F "user=${USER}" \
 		-F "title=${TITLE}" \
+		-F "message=${MESSAGE}" \
+		-F "url=${URL}" \
+		-F "url_title=${URL_TITLE}" \
+		-F "device=${DEVICE}" \
+		-F "sound=${SOUND}" \
+		-F "html=${HTML}" \
+		-F "timestamp=${TIMESTAMP}" \
 		-F "priority=${PRIORITY}" \
 		-F "retry=${RETRY}" \
 		-F "expire=${EXPIRE}" \
-		-F "message=${MESSAGE}" \
 		https://api.pushover.net/1/messages.json \
 	| grep 'errors' > /dev/null 2>&1
-	if [ $? != 0 ];
-	then 
+	if [ $? != 0 ];	then 
 		echo -ne "success!\n\n";
 		echo -ne '\033[0m'
 		exit 0

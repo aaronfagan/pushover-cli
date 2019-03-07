@@ -1,15 +1,21 @@
 #!/bin/bash
 
+VERSION="1.1.1"
+DIR_CONFIG="$HOME/.pushover"
+
 USER=""
 TOKEN=""
 TITLE=""
 MESSAGE=""
+URL=""
+URL_TITLE=""
+DEVICE=""
+SOUND=""
 HTML=""
+TIMESTAMP=""
 PRIORITY="0"
 RETRY="60"
 EXPIRE="86400"
-VERSION="1.1.1"
-DIR_CONFIG="$HOME/.pushover"
 
 config() {
 	LABEL_USER_KEY="User Key"

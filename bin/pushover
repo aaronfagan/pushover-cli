@@ -75,8 +75,7 @@ upgrade() {
 version() {
 	echo -ne "\033[0;37m
 Pushover CLI - v$VERSION - https://github.com/aaronfagan/pushover-cli
-By Aaron Fagan - https://www.aaronfagan.ca/\n
-This project is not written, maintained, or supported by Superblock (the creators of Pushover), and is not an official tool.
+By Aaron Fagan - https://www.aaronfagan.ca/
 \033[0m\n"
 }
 usage() {

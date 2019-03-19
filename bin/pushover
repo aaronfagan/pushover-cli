@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1.1.3"
+VERSION="1.1.4"
 DIR_CONFIG="$HOME/.pushover"
 
 USER=""
@@ -12,6 +12,7 @@ URL_TITLE=""
 DEVICE=""
 SOUND=""
 HTML=""
+MONOSPACE=""
 TIMESTAMP=""
 PRIORITY="0"
 RETRY="60"
@@ -92,12 +93,13 @@ Options:
 	--device        The target device(s) to send the notification to. Comma separated, no spaces. DEFAULT = All devices.
 	--sound	        The notification sound to play upon delivery. More Info: https://pushover.net/api#sounds
 	--html          Enabled HTML message. Set to 1 to enable. More Info: https://pushover.net/api#html
+	--monospace     Enabled Monospace message. Set to 1 to enable. May not be used if --html is used, and vice versa.
 	--timestamp     A Unix timestamp of your message's date and time to display to the user. DEFAULT = The time your message is received by the Pushover API.
 	--priority      Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
 	--retry         How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
 	--expire        How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
 	--config        Configure global Pushover user key and application API token. Set to 'delete' to remove configuration files.
-	--upgrade       Upgrade or downgrade Pushover CLI version.
+	--upgrade       Upgrade or downgrade your installed Pushover CLI version. To downgrade, specify a version number like '--upgrade v1.1.1'.
 	--version       Currently installed version of Pushover CLI.
 	--help          Usage instructions.
 Example:
@@ -154,6 +156,11 @@ while [[ $# -gt 0 ]]; do
 		;;
 		--html)
 			HTML="${2:-$HTML}"
+			shift
+			shift
+		;;
+		--monospace)
+			MONOSPACE="${2:-$MONOSPACE}"
 			shift
 			shift
 		;;
@@ -245,6 +252,7 @@ else
 		-F "device=${DEVICE}" \
 		-F "sound=${SOUND}" \
 		-F "html=${HTML}" \
+		-F "monospace=${MONOSPACE}" \
 		-F "timestamp=${TIMESTAMP}" \
 		-F "priority=${PRIORITY}" \
 		-F "retry=${RETRY}" \

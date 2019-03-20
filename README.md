@@ -12,6 +12,7 @@ rm -rf ./pushover-cli
 Run `pushover --help` for usage instructions.
 
 ### Configuration
+This option allows you to set a global user key and application API token. This can be overridden on a per-use basis by specifying the `--user` and `--token` options.
 ```
 pushover --config
 ```

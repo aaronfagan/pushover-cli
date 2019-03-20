@@ -98,7 +98,7 @@ Options:
 	--priority      Message priority, see: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
 	--retry         How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
 	--expire        How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
-	--config        Configure global Pushover user key and application API token. Set to 'delete' to remove configuration files.
+	--config        Configure global Pushover user key and application API token. Set to 'rm' to delete configuration files.
 	--upgrade       Upgrade or downgrade your installed Pushover CLI version. To downgrade, specify a version number like '--upgrade v1.1.0'.
 	--version, -v   Currently installed version of Pushover CLI.
 	--quiet, -q     Silence all output.

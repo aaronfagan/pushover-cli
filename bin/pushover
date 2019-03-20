@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1.2.0"
+VERSION="1.2.1"
 DIR_CONFIG="$HOME/.pushover"
 
 USER=""
@@ -22,51 +22,51 @@ config() {
 	LABEL_USER_KEY="User Key"
 	LABEL_API_TOKEN="API Token"
 	echo -ne '\033[0;37m\n'
-	if [ -n "$CONFIG" ] && [ $CONFIG == "delete" ]; then
-		rm -rf $DIR_CONFIG
+	if [ -n "${CONFIG}" ] && [ ${CONFIG} == "rm" ]; then
+		rm -rf ${DIR_CONFIG}
 		echo -ne "Pushover CLI configuration deleted.\n\n"
 		echo -ne '\033[0m'
 		exit 0
 	fi
-	if [ -e $DIR_CONFIG/config ]; then
-	    USER_KEY=$(awk -F'"' '/^USER_KEY=/ {print $2}' $DIR_CONFIG/config)
-	    APP_TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $DIR_CONFIG/config)
-	    if [ -z "$USER_KEY" ]; then echo -ne "$LABEL_USER_KEY: "; else echo -ne "$LABEL_USER_KEY [****************${USER_KEY: -4}]: "; fi
+	if [ -e ${DIR_CONFIG}/config ]; then
+	    USER_KEY=$(awk -F'"' '/^USER_KEY=/ {print $2}' ${DIR_CONFIG}/config)
+	    APP_TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' ${DIR_CONFIG}/config)
+	    if [ -z "${USER}_KEY" ]; then echo -ne "${LABEL_USER_KEY}: "; else echo -ne "${LABEL_USER_KEY} [****************${USER_KEY: -4}]: "; fi
 	    read USER_KEY
-	    if [ -z "$APP_TOKEN" ]; then echo -ne "$LABEL_API_TOKEN: "; else echo -ne "$LABEL_API_TOKEN [****************${APP_TOKEN: -4}]: "; fi
+	    if [ -z "$APP_TOKEN" ]; then echo -ne "${LABEL_API_TOKEN}: "; else echo -ne "${LABEL_API_TOKEN} [****************${APP_TOKEN: -4}]: "; fi
 	    read APP_TOKEN
 	else
-		echo -ne "$LABEL_USER_KEY: "
+		echo -ne "${LABEL_USER_KEY}: "
 		read USER_KEY
-		echo -ne "$LABEL_API_TOKEN: "
+		echo -ne "${LABEL_API_TOKEN}: "
 		read APP_TOKEN
-		if [ ! -d $DIR_CONFIG ]; then mkdir $DIR_CONFIG; fi
-		if [ -e $DIR_CONFIG/config ]; then touch $DIR_CONFIG/config; fi
+		if [ ! -d ${DIR_CONFIG} ]; then mkdir ${DIR_CONFIG}; fi
+		if [ -e ${DIR_CONFIG}/config ]; then touch ${DIR_CONFIG}/config; fi
 	fi
-	cat <<EOF > $DIR_CONFIG/config
-USER_KEY="$USER_KEY"
+	cat <<EOF > ${DIR_CONFIG}/config
+USER_KEY="${USER}_KEY"
 APP_TOKEN="$APP_TOKEN"
 EOF
-	chmod 600 $DIR_CONFIG/config
+	chmod 600 ${DIR_CONFIG}/config
 	echo -ne "\nPushover CLI configured successfully.\n\n"
 	echo -ne '\033[0m'
 }
 upgrade() {
 	REPOSITORY="git@github.com:aaronfagan/pushover-cli.git"
 	DIR_TEMP=/tmp/pushover-cli
-	if [ -z "$UPGRADE" ]; then UPGRADE="master"; fi
-	if [ $UPGRADE == "dev" ]; then UPGRADE="develop"; fi
+	if [ -z "${UPGRADE}" ]; then UPGRADE="master"; fi
+	if [ ${UPGRADE} == "dev" ]; then UPGRADE="develop"; fi
 	echo -ne '\033[0;37m'
 	echo -ne "\nDownloading latest version..."
-	git clone --branch $UPGRADE --depth 1 $REPOSITORY $DIR_TEMP > /dev/null 2>&1
+	git clone --branch ${UPGRADE} --depth 1 ${REPOSITORY} ${DIR_TEMP} > /dev/null 2>&1
 	if [ $? == 0 ]; then
 		echo -ne "done!"
-		find $DIR_TEMP -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} $DIR_TEMP $VERSION \;
-		rm -rf $DIR_TEMP
+		find ${DIR_TEMP} -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} ${DIR_TEMP} ${VERSION} \;
+		rm -rf ${DIR_TEMP}
 		echo -ne '\033[0m'
 		exit 0
 	else
-		rm -rf $DIR_TEMP
+		rm -rf ${DIR_TEMP}
 		echo -ne "failed!"
 		echo -ne "\nPushover CLI upgrade failed.\n\n"
 		echo -ne '\033[0m'
@@ -75,7 +75,7 @@ upgrade() {
 }
 version() {
 	echo -ne "\033[0;37m
-Pushover CLI - v$VERSION - https://github.com/aaronfagan/pushover-cli/
+Pushover CLI - v${VERSION} - https://github.com/aaronfagan/pushover-cli/
 By Aaron Fagan - https://www.aaronfagan.ca/
 \033[0m\n"
 }
@@ -99,8 +99,9 @@ Options:
 	--retry         How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
 	--expire        How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
 	--config        Configure global Pushover user key and application API token. Set to 'delete' to remove configuration files.
-	--upgrade       Upgrade or downgrade your installed Pushover CLI version. To downgrade, specify a version number like '--upgrade v1.1.1'.
-	--version       Currently installed version of Pushover CLI.
+	--upgrade       Upgrade or downgrade your installed Pushover CLI version. To downgrade, specify a version number like '--upgrade v1.1.0'.
+	--version, -v   Currently installed version of Pushover CLI.
+	--quiet, -q     Silence all output.
 	--help          Usage instructions.
 Example:
 	pushover \\
@@ -115,12 +116,12 @@ while [[ $# -gt 0 ]]; do
 	key="$1"
 	case $key in
 		--token)
-			TOKEN="${2:-$TOKEN}"
+			TOKEN="${2:-${TOKEN}}"
 			shift
 			shift
 		;;
 		--user)
-			USER="${2:-$USER}"
+			USER="${2:-${USER}}"
 			shift
 			shift
 		;;
@@ -130,7 +131,7 @@ while [[ $# -gt 0 ]]; do
 			shift
 		;;
 		--message)
-			MESSAGE="${2:-$MESSAGE}"
+			MESSAGE="${2:-${MESSAGE}}"
 			shift
 			shift
 		;;
@@ -185,17 +186,20 @@ while [[ $# -gt 0 ]]; do
 			shift
 		;;
 		--config)
-			CONFIG="${2:-$CONFIG}"
 			config
 			exit 0
 		;;
 		--upgrade)
-			UPGRADE="${2:-$UPGRADE}"
 			upgrade
 		;;
 		-v | --version)
 			version
 			exit 0
+		;;
+		-q | --quiet)
+			QUIET=TRUE
+			shift
+			shift
 		;;
 		--help)
 			usage
@@ -204,45 +208,63 @@ while [[ $# -gt 0 ]]; do
 		*) 
 			INVALID+=("$1")
 			shift
-			echo -ne "\033[0;31m\nERROR:\033[0;37m Invalid arguement: $INVALID\033[0m\n"
+			echo -ne "\033[0;31m\nERROR:\033[0;37m Invalid arguement: ${INVALID}\033[0m\n"
 			usage
 			exit 1
 		;;
 	esac
 done
 
-if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]; then
-	echo -ne '\n'
-	if [ -z "$USER" ]; then 
-		if [ -e $DIR_CONFIG/config ]; then
-		    USER=$(awk -F'"' '/^USER_KEY=/ {print $2}' $DIR_CONFIG/config)
-		    if [ -z "$USER" ]; then
-		    	echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"
+if [ -z "${USER}" ] || [ -z "${TOKEN}" ] || [ -z "${MESSAGE}" ]; then
+	if [ -z "${QUIET}" ]; then
+		echo -ne '\n'
+	fi
+	if [ -z "${USER}" ]; then 
+		if [ -e ${DIR_CONFIG}/config ]; then
+		    USER=$(awk -F'"' '/^USER_KEY=/ {print $2}' ${DIR_CONFIG}/config)
+		    if [ -z "${USER}" ]; then
+		    	if [ -z "${QUIET}" ]; then
+		    		echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"
+		    	fi
 		    fi
 		else
-			echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"
+			if [ -z "${QUIET}" ]; then
+				echo -ne "\033[0;31mERROR:\033[0;37m --user arguement is required.\033[0m\n"
+			fi
 		fi
 	fi
-	if [ -z "$TOKEN" ]; then
-		if [ -e $DIR_CONFIG/config ]; then
-		    TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' $DIR_CONFIG/config)
-		    if [ -z "$TOKEN" ]; then
-		    	echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n"
+	if [ -z "${TOKEN}" ]; then
+		if [ -e ${DIR_CONFIG}/config ]; then
+		    TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' ${DIR_CONFIG}/config)
+		    if [ -z "${TOKEN}" ]; then
+		    	if [ -z "${QUIET}" ]; then
+		    		echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n"
+		    	fi
 		    fi
 		else
-			echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n"
+			if [ -z "${QUIET}" ]; then
+				echo -ne "\033[0;31mERROR:\033[0;37m --token arguement is required.\033[0m\n"
+			fi
 		fi
 	fi
-	if [ -z "$MESSAGE" ]; then echo -ne "\033[0;31mERROR:\033[0;37m --message arguement is required.\033[0m\n"; fi
+	if [ -z "${MESSAGE}" ]; then
+		if [ -z "${QUIET}" ]; then
+			echo -ne "\033[0;31mERROR:\033[0;37m --message arguement is required.\033[0m\n"
+		fi
+	fi
 fi
 
-if [ -z "$USER" ] || [ -z "$TOKEN" ] || [ -z "$MESSAGE" ]; then
-	usage
+if [ -z "${USER}" ] || [ -z "${TOKEN}" ] || [ -z "${MESSAGE}" ]; then
+	if [ -z "${QUIET}" ]; then
+		usage
+	fi
 	exit 1
 else
-	echo -ne '\033[0;37m'
-	echo -ne "> Sending notification..."
-	/usr/bin/curl -s \
+	if [ -z "${QUIET}" ]; then
+		echo -ne '\033[0;37m'
+		echo -ne "> Sending notification..."
+	fi
+	CURL=$(/usr/bin/curl -s \
 		-F "token=${TOKEN}" \
 		-F "user=${USER}" \
 		-F "title=${TITLE}" \
@@ -257,15 +279,23 @@ else
 		-F "priority=${PRIORITY}" \
 		-F "retry=${RETRY}" \
 		-F "expire=${EXPIRE}" \
-		https://api.pushover.net/1/messages.json \
-	| grep 'errors' > /dev/null 2>&1
-	if [ $? != 0 ];	then 
-		echo -ne "success!\n\n";
-		echo -ne '\033[0m'
+		https://api.pushover.net/1/messages.json)
+	ERROR=$(echo ${CURL} | grep 'errors')
+	if [ -z "${ERROR}" ]; then
+		if [ -z "${QUIET}" ]; then
+			echo -ne "success!\n\n";
+			echo -ne '\033[0m'
+		fi
 		exit 0
 	else
-		echo -ne "failed!\n\n";
-		echo -ne '\033[0m'
+		if [ -z "${QUIET}" ]; then
+			echo -ne "failed!\n\n";
+			ERROR=$(echo ${ERROR} | sed 's/^.*"errors":\["//')
+			ERROR=$(echo ${ERROR} | sed 's/"],"status".*//')
+			ERROR="$(tr '[:lower:]' '[:upper:]' <<< ${ERROR:0:1})${ERROR:1}"
+			echo -ne "\033[0;31mERROR:\033[0;37m ${ERROR}.\033[0m\n\n"
+			echo -ne '\033[0m'
+		fi
 		exit 1;
 	fi
 fi

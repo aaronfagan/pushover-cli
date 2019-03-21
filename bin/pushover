@@ -186,8 +186,6 @@ while [[ $# -gt 0 ]]; do
 			shift
 		;;
 		--config)
-			shift
-			shift
 			config
 			exit 0
 		;;

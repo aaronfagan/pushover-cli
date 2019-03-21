@@ -20,7 +20,7 @@ EXPIRE="3600"
 
 config() {
 	LABEL_USER_KEY="User Key"
-	LABEL_API_TOKEN="API Token"
+	LABEL_APP_TOKEN="API Token"
 	echo -ne '\033[0;37m\n'
 	if [ -n "${CONFIG}" ] && [ ${CONFIG} == "rm" ]; then
 		rm -rf ${DIR_CONFIG}
@@ -33,12 +33,12 @@ config() {
 	    APP_TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' ${DIR_CONFIG}/config)
 	    if [ -z "${USER_KEY}" ]; then echo -ne "${LABEL_USER_KEY}: "; else echo -ne "${LABEL_USER_KEY} [****************${USER_KEY: -4}]: "; fi
 	    read USER_KEY
-	    if [ -z "${APP_TOKEN}" ]; then echo -ne "${LABEL_API_TOKEN}: "; else echo -ne "${LABEL_API_TOKEN} [****************${APP_TOKEN: -4}]: "; fi
+	    if [ -z "${APP_TOKEN}" ]; then echo -ne "${LABEL_APP_TOKEN}: "; else echo -ne "${LABEL_APP_TOKEN} [****************${APP_TOKEN: -4}]: "; fi
 	    read APP_TOKEN
 	else
 		echo -ne "${LABEL_USER_KEY}: "
 		read USER_KEY
-		echo -ne "${LABEL_API_TOKEN}: "
+		echo -ne "${LABEL_APP_TOKEN}: "
 		read APP_TOKEN
 		if [ ! -d ${DIR_CONFIG} ]; then mkdir ${DIR_CONFIG}; fi
 		if [ -e ${DIR_CONFIG}/config ]; then touch ${DIR_CONFIG}/config; fi

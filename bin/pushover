@@ -193,6 +193,8 @@ while [[ $# -gt 0 ]]; do
 			exit 0
 		;;
 		--upgrade)
+			UPGRADE="${2:-$UPGRADE}"
+			shift
 			shift
 			upgrade
 		;;

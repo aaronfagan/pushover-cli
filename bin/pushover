@@ -186,6 +186,7 @@ while [[ $# -gt 0 ]]; do
 			shift
 		;;
 		--config)
+			CONFIG="${2:-$CONFIG}"
 			shift
 			shift
 			config

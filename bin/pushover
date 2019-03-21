@@ -31,7 +31,7 @@ config() {
 	if [ -e ${DIR_CONFIG}/config ]; then
 	    USER_KEY=$(awk -F'"' '/^USER_KEY=/ {print $2}' ${DIR_CONFIG}/config)
 	    APP_TOKEN=$(awk -F'"' '/^APP_TOKEN=/ {print $2}' ${DIR_CONFIG}/config)
-	    if [ -z "${USER}_KEY" ]; then echo -ne "${LABEL_USER_KEY}: "; else echo -ne "${LABEL_USER_KEY} [****************${USER_KEY: -4}]: "; fi
+	    if [ -z "${USER_KEY}" ]; then echo -ne "${LABEL_USER_KEY}: "; else echo -ne "${LABEL_USER_KEY} [****************${USER_KEY: -4}]: "; fi
 	    read USER_KEY
 	    if [ -z "$APP_TOKEN" ]; then echo -ne "${LABEL_API_TOKEN}: "; else echo -ne "${LABEL_API_TOKEN} [****************${APP_TOKEN: -4}]: "; fi
 	    read APP_TOKEN
@@ -44,7 +44,7 @@ config() {
 		if [ -e ${DIR_CONFIG}/config ]; then touch ${DIR_CONFIG}/config; fi
 	fi
 	cat <<EOF > ${DIR_CONFIG}/config
-USER_KEY="${USER}_KEY"
+USER_KEY="${USER_KEY}"
 APP_TOKEN="$APP_TOKEN"
 EOF
 	chmod 600 ${DIR_CONFIG}/config

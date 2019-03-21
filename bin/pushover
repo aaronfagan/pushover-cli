@@ -186,22 +186,25 @@ while [[ $# -gt 0 ]]; do
 			shift
 		;;
 		--config)
+			shift
 			config
 			exit 0
 		;;
 		--upgrade)
+			shift
 			upgrade
 		;;
 		-v | --version)
+			shift
 			version
 			exit 0
 		;;
 		-q | --quiet)
+			shift
 			QUIET=TRUE
-			shift
-			shift
 		;;
 		--help)
+			shift
 			usage
 			exit 0
 		;;

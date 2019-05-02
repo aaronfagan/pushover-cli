@@ -6,7 +6,7 @@ git clone --depth 1 git@github.com:aaronfagan/pushover-cli.git /tmp/pushover-cli
 cp /tmp/pushover-cli/bin/pushover /usr/local/bin/pushover
 chmod +x /usr/local/bin/pushover
 rm -rf /tmp/pushover-cli
-echo -ne "done!\n\n"
+echo -ne "done!\n"
 VERSION=$(awk -F'"' '/^VERSION=/ {print $2}' /usr/local/bin/pushover)
-echo -ne "\nPushover CLI (v${VERSION}) installed successfully! Run 'pushover --help' for usage instructions.\n\n"
+echo -ne "\n\nPushover CLI (v${VERSION}) installed successfully! Run 'pushover --help' for usage instructions.\n\n"
 echo -ne '\033[0m'

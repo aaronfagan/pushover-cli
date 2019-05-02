@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1.2.2"
+VERSION="1.2.3"
 DIR_CONFIG="$HOME/.pushover"
 
 USER=""
@@ -54,15 +54,24 @@ EOF
 upgrade() {
 	REPOSITORY="git@github.com:aaronfagan/pushover-cli.git"
 	DIR_TEMP=/tmp/pushover-cli
-	if [ -z "${UPGRADE}" ]; then UPGRADE="master"; fi
-	if [ ${UPGRADE} == "dev" ]; then UPGRADE="develop"; fi
+	DIR_BIN="/usr/local/bin"
+	if [ -z "${UPGRADE}" ]; then BRANCH="master"; fi
+	if [ ${UPGRADE} == "dev" ]; then BRANCH="develop"; fi
 	echo -ne '\033[0;37m'
 	echo -ne "\nDownloading latest version..."
-	git clone --branch ${UPGRADE} --depth 1 ${REPOSITORY} ${DIR_TEMP} > /dev/null 2>&1
+	git clone --branch ${BRANCH} --depth 1 ${REPOSITORY} ${DIR_TEMP} > /dev/null 2>&1
 	if [ $? == 0 ]; then
 		echo -ne "done!"
-		find ${DIR_TEMP} -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} ${DIR_TEMP} ${VERSION} \;
+		VERSION_OLD=${VERSION}
+		VERSION_NEW=$(awk -F'"' '/^VERSION=/ {print $2}' ${DIR_TEMP}/pushover)
+		cp ${DIR_TEMP}/pushover ${DIR_BIN}/pushover
+		chmod +x ${DIR_BIN}/pushover
 		rm -rf ${DIR_TEMP}
+		if [ "${VERSION_OLD}" == "${VERSION_NEW}" ]; then
+			echo -ne "\nPushover CLI is already the latest version (v${VERSION_OLD}).\n\n"
+		else
+			echo -ne "\nPushover CLI upgraded successfully (v${VERSION_OLD} => v${VERSION_NEW}).\n\n"
+		fi
 		echo -ne '\033[0m'
 		exit 0
 	else
@@ -297,9 +306,6 @@ else
 	else
 		if [ -z "${QUIET}" ]; then
 			echo -ne "failed!\n\n";
-			ERROR=$(echo ${ERROR} | sed 's/^.*"errors":\["//')
-			ERROR=$(echo ${ERROR} | sed 's/"],"status".*//')
-			ERROR="$(tr '[:lower:]' '[:upper:]' <<< ${ERROR:0:1})${ERROR:1}"
 			echo -ne "\033[0;31mERROR:\033[0;37m ${ERROR}.\033[0m\n\n"
 			echo -ne '\033[0m'
 		fi

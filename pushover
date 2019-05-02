@@ -63,7 +63,7 @@ upgrade() {
 		echo -ne "done!"
 		VERSION_OLD=${VERSION}
 		VERSION_NEW=$(awk -F'"' '/^VERSION=/ {print $2}' ${DIR_TEMP}/pushover)
-		#rm -rf ${DIR_TEMP}
+		rm -rf ${DIR_TEMP}
 		if [ "${VERSION_OLD}" == "${VERSION_NEW}" ]; then
 			echo -ne "\nPushover CLI is already the latest version (v${VERSION_OLD}).\n\n"
 		else

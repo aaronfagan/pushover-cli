@@ -7,6 +7,6 @@ cp /tmp/pushover-cli/bin/pushover /usr/local/bin/pushover
 chmod +x /usr/local/bin/pushover
 rm -rf /tmp/pushover-cli
 VERSION=$(awk -F'"' '/^VERSION=/ {print $2}' /usr/local/bin/pushover)
-#echo -ne "done!\n"
+echo -ne "done!\n"
 echo -ne "\nPushover CLI (v${VERSION}) installed successfully! Run 'pushover --help' for usage instructions.\n\n"
 echo -ne '\033[0m'

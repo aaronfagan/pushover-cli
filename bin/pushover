@@ -55,8 +55,7 @@ upgrade() {
 	DIR_TEMP="/tmp/pushover-cli"
 	DIR_BIN="/usr/local/bin"
 	BRANCH="${UPGRADE}"
-	if [ -z "${BRANCH}" ]; then BRANCH="master"; fi
-	if [ "${BRANCH}" == "dev" ]; then BRANCH="develop"; fi
+	if [ "${BRANCH}" == "dev" ]; then BRANCH="develop";	else BRANCH="master"; fi
 	echo -ne '\033[0;37m'
 	echo -ne "\nDownloading latest version..."
 	curl -s https://raw.githubusercontent.com/aaronfagan/pushover-cli/${BRANCH}/scripts/install.sh | bash -s ${BRANCH} upgrade > /dev/null 2>&1
@@ -106,7 +105,7 @@ Options:
 	--retry         How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
 	--expire        How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
 	--config        Configure global Pushover user key and application API token. Set to 'rm' to delete configuration files.
-	--upgrade       Upgrade or downgrade your installed Pushover CLI version. To downgrade, specify a version number like '--upgrade v1.1.0'.
+	--upgrade       Upgrade to the latest Pushover CLI version.'.
 	--version, -v   Currently installed version of Pushover CLI.
 	--quiet, -q     Silence all output.
 	--help          Usage instructions.

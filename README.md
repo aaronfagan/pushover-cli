@@ -3,9 +3,7 @@ A command line interface for [Pushover](https://pushover.net/) notifications. Th
 
 ## Installation
 ```
-git clone git@github.com:aaronfagan/pushover-cli.git && \
-find ./pushover-cli -type f -name "install.sh" -exec chmod +x {} \; -exec bash {} \; && \
-rm -rf ./pushover-cli
+curl https://raw.githubusercontent.com/aaronfagan/pushover-cli/develop/install.sh | bash
 ```
 
 ## Usage

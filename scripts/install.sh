@@ -3,11 +3,7 @@
 echo -ne '\033[0;37m'
 echo -ne "\nDownloading Pushover CLI..."
 BRANCH="${1}"
-if [ "${BRANCH}" == "dev" ]; then
-	BRANCH="develop"
-else
-	BRANCH="master"
-fi
+if [ "${BRANCH}" == "dev" ]; then BRANCH="develop"; else BRANCH="master"; fi
 git clone --branch "${BRANCH}" --depth 1 git@github.com:aaronfagan/pushover-cli.git /tmp/pushover-cli > /dev/null 2>&1
 cp /tmp/pushover-cli/bin/pushover /usr/local/bin/pushover
 chmod +x /usr/local/bin/pushover

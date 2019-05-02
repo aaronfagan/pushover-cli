@@ -3,7 +3,7 @@ A command line interface for [Pushover](https://pushover.net/) notifications. Th
 
 ## Installation
 ```
-curl -s https://raw.githubusercontent.com/aaronfagan/pushover-cli/master/install.sh | bash
+curl -s https://raw.githubusercontent.com/aaronfagan/pushover-cli/master/scripts/install.sh | bash
 ```
 
 ## Usage

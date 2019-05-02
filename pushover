@@ -56,7 +56,7 @@ upgrade() {
 	DIR_TEMP=/tmp/pushover-cli
 	DIR_BIN="/usr/local/bin"
 	if [ -z "${UPGRADE}" ]; then BRANCH="master"; fi
-	if [ ${UPGRADE} == "dev" ]; then BRANCH="develop"; fi
+	if [ "${UPGRADE}" == "dev" ]; then BRANCH="develop"; fi
 	echo -ne '\033[0;37m'
 	echo -ne "\nDownloading latest version..."
 	git clone --branch ${BRANCH} --depth 1 ${REPOSITORY} ${DIR_TEMP} > /dev/null 2>&1

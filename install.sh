@@ -12,4 +12,4 @@ VERSION=$(awk -F'"' '/^VERSION=/ {print $2}' /usr/local/bin/pushover)
 echo -ne "\nPushover CLI (v${VERSION}) installed successfully! Run 'pushover --help' for usage instructions.\n\n"
 echo -ne '\033[0m'
 echo "----> ${2}"
-if [ "${2}" != "upgrade" ]; then rm -rf /tmp/pushover-cli; fi
+#if [ "${2}" != "upgrade" ]; then rm -rf /tmp/pushover-cli; fi

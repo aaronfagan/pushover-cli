@@ -69,14 +69,15 @@ upgrade() {
 			echo -ne "\nPushover CLI upgraded successfully (v${VERSION_OLD} => v${VERSION_NEW}).\n\n"
 		fi
 		echo -ne '\033[0m'
+		rm -rf ${DIR_TEMP}
 		exit 0
 	else
 		echo -ne "failed!"
 		echo -ne "\nPushover CLI upgrade failed.\n\n"
 		echo -ne '\033[0m'
+		rm -rf ${DIR_TEMP}
 		exit 1
 	fi
-	rm -rf ${DIR_TEMP}
 }
 version() {
 	echo -ne "\033[0;37m

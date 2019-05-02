@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo -ne '\033[0;37m'
-echo -ne "\nInstalling latest version..."
+echo -ne "\nInstalling Pushover CLI..."
 UPGRADE="master"
 if [ ${1} == "dev" ]; then UPGRADE="develop"; fi
 git clone --branch ${UPGRADE} --depth 1 git@github.com:aaronfagan/pushover-cli.git /tmp/pushover-cli > /dev/null 2>&1

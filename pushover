@@ -52,8 +52,7 @@ EOF
 	echo -ne '\033[0m'
 }
 upgrade() {
-	REPOSITORY="git@github.com:aaronfagan/pushover-cli.git"
-	DIR_TEMP=/tmp/pushover-cli
+	DIR_TEMP="/tmp/pushover-cli"
 	DIR_BIN="/usr/local/bin"
 	if [ -z "${UPGRADE}" ]; then BRANCH="master"; fi
 	if [ "${UPGRADE}" == "dev" ]; then BRANCH="develop"; fi

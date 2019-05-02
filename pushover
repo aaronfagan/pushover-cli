@@ -55,11 +55,11 @@ upgrade() {
 	REPOSITORY="git@github.com:aaronfagan/pushover-cli.git"
 	DIR_TEMP=/tmp/pushover-cli
 	DIR_BIN="/usr/local/bin"
-	if [ -z "${UPGRADE}" ]; then UPGRADE="master"; fi
-	if [ ${UPGRADE} == "dev" ]; then UPGRADE="develop"; fi
+	if [ -z "${UPGRADE}" ]; then BRANCH="master"; fi
+	if [ ${UPGRADE} == "dev" ]; then BRANCH="develop"; fi
 	echo -ne '\033[0;37m'
 	echo -ne "\nDownloading latest version..."
-	git clone --branch ${UPGRADE} --depth 1 ${REPOSITORY} ${DIR_TEMP} > /dev/null 2>&1
+	git clone --branch ${BRANCH} --depth 1 ${REPOSITORY} ${DIR_TEMP} > /dev/null 2>&1
 	if [ $? == 0 ]; then
 		echo -ne "done!"
 		VERSION_OLD=${VERSION}

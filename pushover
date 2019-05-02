@@ -54,6 +54,7 @@ EOF
 upgrade() {
 	REPOSITORY="git@github.com:aaronfagan/pushover-cli.git"
 	DIR_TEMP=/tmp/pushover-cli
+	DIR_BIN="/usr/local/bin"
 	if [ -z "${UPGRADE}" ]; then UPGRADE="master"; fi
 	if [ ${UPGRADE} == "dev" ]; then UPGRADE="develop"; fi
 	echo -ne '\033[0;37m'
@@ -61,8 +62,16 @@ upgrade() {
 	git clone --branch ${UPGRADE} --depth 1 ${REPOSITORY} ${DIR_TEMP} > /dev/null 2>&1
 	if [ $? == 0 ]; then
 		echo -ne "done!"
-		find ${DIR_TEMP} -type f -name "upgrade.sh" -exec chmod +x {} \; -exec bash {} ${DIR_TEMP} ${VERSION} \;
+		VERSION_OLD=${VERSION}
+		VERSION_NEW=$(awk -F'"' '/^VERSION=/ {print $2}' ${DIR_TEMP}/pushover)
+		cp ${DIR_TEMP}/pushover ${DIR_BIN}/pushover
+		chmod +x ${DIR_BIN}/pushover
 		rm -rf ${DIR_TEMP}
+		if [ "${VERSION_OLD}" == "${VERSION_NEW}" ]; then
+			echo -ne "\nPushover CLI is already the latest version (v${VERSION_OLD}).\n\n"
+		else
+			echo -ne "\nPushover CLI upgraded successfully (v${VERSION_OLD} => v${VERSION_NEW}).\n\n"
+		fi
 		echo -ne '\033[0m'
 		exit 0
 	else

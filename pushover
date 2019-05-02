@@ -306,9 +306,6 @@ else
 	else
 		if [ -z "${QUIET}" ]; then
 			echo -ne "failed!\n\n";
-			ERROR=$(echo ${ERROR} | sed 's/^.*"errors":\["//')
-			ERROR=$(echo ${ERROR} | sed 's/"],"status".*//')
-			ERROR="$(tr '[:lower:]' '[:upper:]' <<< ${ERROR:0:1})${ERROR:1}"
 			echo -ne "\033[0;31mERROR:\033[0;37m ${ERROR}.\033[0m\n\n"
 			echo -ne '\033[0m'
 		fi

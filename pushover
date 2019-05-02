@@ -76,7 +76,7 @@ upgrade() {
 		echo -ne '\033[0m'
 		exit 1
 	fi
-	#rm -rf ${DIR_TEMP}
+	rm -rf ${DIR_TEMP}
 }
 version() {
 	echo -ne "\033[0;37m

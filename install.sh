@@ -4,7 +4,7 @@ echo -ne '\033[0;37m'
 echo -ne "\nInstalling Pushover CLI..."
 if [ -z "${1}" ]; then 1="origin/master"; fi
 if [ "${1}" == "dev" ]; then 1="develop"; fi
-git clone --branch "${1}" --depth 1 git@github.com:aaronfagan/pushover-cli.git /tmp/pushover-cli
+git clone --branch "${1}" --depth 1 git@github.com:aaronfagan/pushover-cli.git /tmp/pushover-cli > /dev/null 2>&1
 cp /tmp/pushover-cli/pushover /usr/local/bin/pushover
 chmod +x /usr/local/bin/pushover
 echo -ne "done!\n"

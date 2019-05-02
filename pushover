@@ -59,7 +59,7 @@ upgrade() {
 	if [ "${UPGRADE}" == "dev" ]; then BRANCH="develop"; fi
 	echo -ne '\033[0;37m'
 	echo -ne "\nDownloading latest version..."
-	curl https://raw.githubusercontent.com/aaronfagan/pushover-cli/master/install.sh | bash -s ${BRANCH} > /dev/null 2>&1
+	curl -s https://raw.githubusercontent.com/aaronfagan/pushover-cli/master/install.sh | bash -s ${BRANCH} > /dev/null 2>&1
 	if [ $? == 0 ]; then
 		echo -ne "done!"
 		VERSION_OLD=${VERSION}

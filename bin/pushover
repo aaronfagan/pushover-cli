@@ -55,11 +55,7 @@ upgrade() {
 	DIR_TEMP="/tmp/pushover-cli"
 	DIR_BIN="/usr/local/bin"
 	BRANCH="${UPGRADE}"
-	if [ "${BRANCH}" == "dev" ]; then
-		BRANCH="develop"
-	else
-		BRANCH="master"
-	fi
+	if [ "${BRANCH}" == "dev" ]; then BRANCH="develop"; else BRANCH="master"; fi
 	echo -ne '\033[0;37m'
 	echo -ne "\nDownloading latest version..."
 	curl -s https://raw.githubusercontent.com/aaronfagan/pushover-cli/${BRANCH}/scripts/install.sh | bash -s ${BRANCH} upgrade > /dev/null 2>&1

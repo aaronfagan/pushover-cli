@@ -6,7 +6,7 @@ BRANCH="${1}"
 if [ -z "${BRANCH}" ]; then BRANCH="master"; fi
 if [ "${BRANCH}" == "dev" ]; then BRANCH="develop"; fi
 git clone --branch "${BRANCH}" --depth 1 git@github.com:aaronfagan/pushover-cli.git /tmp/pushover-cli > /dev/null 2>&1
-cp /tmp/pushover-cli/pushover /usr/local/bin/pushover
+cp /tmp/pushover-cli/bin/pushover /usr/local/bin/pushover
 chmod +x /usr/local/bin/pushover
 echo -ne "done!"
 VERSION=$(awk -F'"' '/^VERSION=/ {print $2}' /usr/local/bin/pushover)

@@ -2,7 +2,7 @@
 
 echo -ne '\033[0;37m'
 echo -ne "\nInstalling latest version..."
-git clone --depth 1 git@github.com:aaronfagan/pushover-cli.git /tmp/pushover-cli > /dev/null 2>&1
+git clone --branch develop --depth 1 git@github.com:aaronfagan/pushover-cli.git /tmp/pushover-cli > /dev/null 2>&1
 cp /tmp/pushover-cli/pushover /usr/local/bin/pushover
 chmod +x /usr/local/bin/pushover
 rm -rf /tmp/pushover-cli

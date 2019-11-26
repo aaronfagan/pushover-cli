@@ -115,7 +115,7 @@ Example:
     --token YOUR_APP_TOKEN \\
     --title \"Test Notification\" \\
     --message \"Here is the notification!\"
-	"
+"
 }
 
 while [[ $# -gt 0 ]]; do

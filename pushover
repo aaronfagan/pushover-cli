@@ -88,33 +88,33 @@ By Aaron Fagan - https://www.aaronfagan.ca/
 usage() {
 	echo "
 Usage:
-	pushover [options]
+    pushover [options]
 Options:
-	--user          Pushover user key. REQUIRED.
-	--token         Pushover application API token. REQUIRED.
-	--title         Notification title.
-	--message       Notification message. If you are seeing errors, try wrapping your message in 'single quotes.' REQUIRED.
-	--url           A supplementary URL to show with your message.
-	--url-title     A title for your supplementary URL, otherwise just the URL is shown.
-	--device        The target device(s) to send the notification to. Comma separated, no spaces. DEFAULT = All devices.
-	--sound	        The notification sound to play upon delivery. More Info: https://pushover.net/api#sounds
-	--html          Enabled HTML message. Set to 1 to enable. More Info: https://pushover.net/api#html
-	--monospace     Enabled Monospace message. Set to 1 to enable. May not be used if --html is used, and vice versa.
-	--timestamp     A Unix timestamp of your message's date and time to display to the user. DEFAULT = The time your message is received by the Pushover API.
-	--priority      Message priority. More Info: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
-	--retry         How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
-	--expire        How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
-	--config        Configure global Pushover user key and application API token. Set to 'rm' to delete configuration files.
-	--upgrade       Upgrade to the latest Pushover CLI version.'.
-	--version, -v   Currently installed version of Pushover CLI.
-	--quiet, -q     Silence all output.
-	--help          Usage instructions.
+    --user          Pushover user key. REQUIRED.
+    --token         Pushover application API token. REQUIRED.
+    --title         Notification title.
+    --message       Notification message. If you are seeing errors, try wrapping your message in 'single quotes.' REQUIRED.
+    --url           A supplementary URL to show with your message.
+    --url-title     A title for your supplementary URL, otherwise just the URL is shown.
+    --device        The target device(s) to send the notification to. Comma separated, no spaces. DEFAULT = All devices.
+    --sound         The notification sound to play upon delivery. More Info: https://pushover.net/api#sounds
+    --html          Enabled HTML message. Set to 1 to enable. More Info: https://pushover.net/api#html
+    --monospace     Enabled Monospace message. Set to 1 to enable. May not be used if --html is used, and vice versa.
+    --timestamp     A Unix timestamp of your message's date and time to display to the user. DEFAULT = The time your message is received by the Pushover API.
+    --priority      Message priority. More Info: https://pushover.net/api#priority. DEFAULT = $PRIORITY.
+    --retry         How many seconds between retries. Only applies when --priority is set to 2 (emergency). DEFAULT = $RETRY.
+    --expire        How many seconds until emergency notification retries will stop. Only applies when --priority is set to 2 (emergency). DEFAULT = $EXPIRE.
+    --config        Configure global Pushover user key and application API token. Set to 'rm' to delete configuration files.
+    --upgrade       Upgrade to the latest Pushover CLI version.'.
+    -v, --version   Currently installed version of Pushover CLI.
+    -q, --quiet     Silence all output.
+    -h, --help      Usage instructions.
 Example:
-	pushover \\
-	--user YOUR_USER_KEY \\
-	--token YOUR_APP_TOKEN \\
-	--title \"Test Notification\" \\
-	--message \"Here is the notification!\"
+    pushover \\
+    --user YOUR_USER_KEY \\
+    --token YOUR_APP_TOKEN \\
+    --title \"Test Notification\" \\
+    --message \"Here is the notification!\"
 	"
 }
 
@@ -213,7 +213,7 @@ while [[ $# -gt 0 ]]; do
 			shift
 			QUIET=TRUE
 		;;
-		--help)
+		-h | --help)
 			shift
 			usage
 			exit 0

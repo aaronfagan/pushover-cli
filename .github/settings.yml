@@ -1,7 +1,7 @@
 repository:
   name: pushover-cli
-  description: Docker image that provides dynamic DNS with Route 53.
-  homepage: 
+  description: null
+  homepage: null
   default_branch: master
   private: false
   has_issues: true

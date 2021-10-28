@@ -1,8 +1,8 @@
 repository:
-  name: pushover-cli
-  description: "Pushover CLI - A command line interface for Pushover notifications"
-  homepage: ""
-  default_branch: master
+  name: 'pushover-cli'
+  description: 'Pushover CLI - A command line interface for Pushover notifications'
+  homepage: ''
+  default_branch: 'master'
   private: false
   has_issues: true
   has_wiki: false
@@ -13,9 +13,9 @@ repository:
   allow_rebase_merge: true
 
 labels:
-  - name: bug
-    color: CC0000
-  - name: feature
-    color: 336699
-  # - name: first-timers-only
-  #   oldname: Help Wanted # Include if renaming
+  - name: 'bug'
+    color: 'CC0000'
+  - name: 'feature'
+    color: '336699'
+  # - name: 'first-timers-only'
+  #   oldname: 'Help Wanted' # Include if renaming
